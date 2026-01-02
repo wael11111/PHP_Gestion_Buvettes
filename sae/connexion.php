@@ -9,9 +9,9 @@ class connexion {
 	
 	public static function initConnextion()  {
 		self::$bdd =new PDO(
-        'mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201628;charset=utf8',
-        'dutinfopw201628',
-        'bumuqasy');
+        'mysql:host=localhost;dbname=dutinfopw201627;charset=utf8',
+        'dutinfopw201627',
+        'tuquvyba');
        }
     }
 ?>
