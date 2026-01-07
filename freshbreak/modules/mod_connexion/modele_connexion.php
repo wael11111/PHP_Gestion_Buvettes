@@ -5,32 +5,32 @@ require_once('connexion.php');
 class ModeleConnexion extends connexion {
 
     public function loginExiste($login) {
-        $req = self::$bdd->prepare("SELECT COUNT(*) FROM utilsateurs WHERE login = :login");
+        $req = self::$bdd->prepare("SELECT COUNT(*) FROM utilisateur WHERE login = :login");
         $req->bindParam(':login', $login);
         $req->execute();
         return $req->fetchColumn() > 0;
     }
 
 
-public function ajouterUtilisateur($login, $mdp) {
+public function ajouterUtilisateur($login, $password) {
    
-    $mdp_hash = password_hash($mdp, PASSWORD_DEFAULT); 
+    $mdp_hash = password_hash($password, PASSWORD_DEFAULT);
     
-    $req = self::$bdd->prepare("INSERT INTO utilsateurs (login, mdp) VALUES (:login, :mdp)");
+    $req = self::$bdd->prepare("INSERT INTO utilisateur (login, password, solde) VALUES (:login, :password, 0)");
     $req->bindParam(':login', $login);
-    $req->bindParam(':mdp', $mdp_hash);
+    $req->bindParam(':password', $mdp_hash);
+
+
     $req->execute();
 }
-
-
-    public function verifierConnexion($login, $mdp) {
-        $req = self::$bdd->prepare("SELECT mdp FROM utilsateurs WHERE login = :login");
+    public function verifierConnexion($login, $password) {
+        $req = self::$bdd->prepare("SELECT password FROM utilisateur WHERE login = :login");
         $req->bindParam(':login', $login);
         $req->execute();
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
         var_dump($resultat);
 
-        if ($resultat && password_verify($mdp, $resultat['mdp'])) {
+        if ($resultat && password_verify($password, $resultat['password'])) {
             return true;
         }
         return false;

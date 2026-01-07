@@ -15,16 +15,17 @@ echo '<h1>Mon site</h1>';
 if (isset($_SESSION['login'])) {
     echo '<p>Connecté sous <b>' . htmlspecialchars($_SESSION['login']) . '</b> ';
     echo '| <a href="index.php?module=connexion&action=deconnexion">Se déconnecter</a></p>';
+    echo '<ul>
+            <li><a href="index.php?module=buvettes">Buvettes</a></li>
+           </ul>';
 } else {
+    echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
     echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
 }
 echo '</header>';
 
-// Menu•••••••••••••
-echo '<ul>
-  <li><a href="index.php?module=joueurs">Joueurs</a></li>
-  <li><a href="index.php?module=equipes">Équipes</a></li>
-</ul>';
+
+
 
 // Détermination du module
 $module = isset($_GET['module']) ? $_GET['module'] : 'error';
