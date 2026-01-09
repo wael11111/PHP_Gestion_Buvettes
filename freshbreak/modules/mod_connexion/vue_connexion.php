@@ -45,5 +45,3 @@ class VueConnexion {
 }
 ?>
 
-
-// le probleme la c'est l'inscription de l'user qui se fait pas hashé 

@@ -17,10 +17,12 @@ if (isset($_SESSION['login'])) {
     echo '| <a href="index.php?module=connexion&action=deconnexion">Se déconnecter</a></p>';
     echo '<ul>
             <li><a href="index.php?module=buvettes">Buvettes</a></li>
+            <li><a href="index.php?module=creationBuvettes">Ajouter Votre Buvette</a></li>
            </ul>';
 } else {
+
     echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
-    echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
+
 }
 echo '</header>';
 
@@ -28,28 +30,28 @@ echo '</header>';
 
 
 // Détermination du module
-$module = isset($_GET['module']) ? $_GET['module'] : 'error';
 
-switch ($module) {
-    case 'joueurs':
-        require_once('modules/mod_joueur/mod_joueurs.php');
-        $mod = new ModJoueurs();
-        break;
+    $module = isset($_GET['module']) ? $_GET['module'] : 'error';
 
-    case 'connexion':
-        require_once('modules/mod_connexion/mod_connexion.php');
-        $mod = new ModConnexion();
-        break;
+    switch ($module) {
+        case 'creationBuvettes':
+            require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
+            $mod = new mod_creationBuvettes();
+            break;
 
-    case 'equipes':
-        require_once('modules/mod_equipes/mod_equipes.php');
-        $mod = new ModEquipes();
-        break;
+        case 'connexion':
+            require_once('modules/mod_connexion/mod_connexion.php');
+            $mod = new ModConnexion();
+            break;
 
-    default:
-        die("Module inconnu");
-}
+        case 'Buvettes':
+            require_once('modules/mod_creationBuvettes/mod_buvette.php');
+            $mod = new Mod_creationBuvettes();
+            break;
 
-$mod->exec();
+
+    }
+    $mod->exec();
+
 ?>
 
