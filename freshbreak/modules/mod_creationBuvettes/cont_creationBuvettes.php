@@ -20,7 +20,7 @@ class cont_creationBuvettes
 
             $nom = trim($_POST['nom']);
 
-            if ($nom === '') {
+            if ($nom == '') {
                 $this->vue->message("❌ Le nom de la buvette est obligatoire.");
                 return;
             }
@@ -29,11 +29,8 @@ class cont_creationBuvettes
                 $this->vue->message("❌ Cette buvette existe déjà.");
                 return;
             }
-                if ($this->modele->ajouterBuvette($nom)) {
-                    $this->vue->message(" Buvette créée avec succès !");
-                } else {
-                    $this->vue->message(" Impossible de créer la buvette.");
-                }
+                 $this->modele->ajouterBuvette($nom);
+
 
 
         } else {
