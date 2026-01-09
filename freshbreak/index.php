@@ -35,23 +35,24 @@
         case 'creationBuvettes':
             require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
             $mod = new ModCreationBuvettes();
+            $mod->exec();
             break;
 
         case 'connexion':
             require_once('modules/mod_connexion/mod_connexion.php');
             $mod = new ModConnexion();
+            $mod->exec();
             break;
 
         case 'solde_refill':
             require_once('modules/mod_solde_refill/mod_solde_refill.php');
             $mod = new ModSoldeRefill();
+            $mod->exec();
             break;
         //        case 'Buvettes':
         //            require_once('modules/mod_creationBuvettes/mod_buvette.php');
         //            $mod = new ModBuvettes();
         //            break;
     }
-
-    $mod->exec();
 ?>
 
