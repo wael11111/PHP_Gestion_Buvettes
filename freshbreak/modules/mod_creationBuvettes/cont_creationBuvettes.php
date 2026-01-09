@@ -3,13 +3,12 @@ if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('vue_creationBuvettes.php');
 require_once('modele_creationBuvettes.php');
 
-class cont_creationBuvettes
-{
+class ContCreationBuvettes {
     private $vue;
     private $modele;
     public function __construct() {
-        $this->vue = new vue_creationBuvettes();
-        $this->modele = new modele_creationBuvettes();
+        $this->vue = new VueCreationBuvettes();
+        $this->modele = new ModeleCreationBuvettes();
 
         // Démarre la session si ce n’est pas déjà fait
         if (session_status() === PHP_SESSION_NONE) {

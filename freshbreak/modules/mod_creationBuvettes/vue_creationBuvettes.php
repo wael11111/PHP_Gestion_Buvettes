@@ -1,8 +1,7 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
 
-class vue_creationBuvettes
-{
+class VueCreationBuvettes {
     public function form_inscription() {
         echo '
         <h2>Inscription</h2>
