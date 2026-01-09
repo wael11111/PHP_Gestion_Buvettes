@@ -19,8 +19,6 @@ public function ajouterUtilisateur($login, $password) {
     $req = self::$bdd->prepare("INSERT INTO utilisateur (login, password, solde) VALUES (:login, :password, 0)");
     $req->bindParam(':login', $login);
     $req->bindParam(':password', $mdp_hash);
-
-
     $req->execute();
 }
     public function verifierConnexion($login, $password) {
@@ -28,12 +26,20 @@ public function ajouterUtilisateur($login, $password) {
         $req->bindParam(':login', $login);
         $req->execute();
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
-        var_dump($resultat);
 
         if ($resultat && password_verify($password, $resultat['password'])) {
             return true;
         }
         return false;
+    }
+
+    public function getSolde($login) {
+        $req = self::$bdd->prepare("SELECT solde FROM utilisateur WHERE login = :login");
+        $req->bindParam(':login', $login);
+        $req->execute();
+        $resultat = $req->fetch()[0];
+        var_dump($resultat);
+        return $resultat;
     }
 }
 ?>

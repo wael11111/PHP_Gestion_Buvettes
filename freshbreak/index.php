@@ -9,17 +9,17 @@ require_once('connexion.php');
 connexion::initConnextion();
 
 echo '<header>';
-echo '<h1>Mon site</h1>';
+echo '<h1>Freshbreak</h1>';
 
 // Vérifie si un utilisateur est connecté
 if (isset($_SESSION['login'])) {
-    echo '<p>Connecté sous <b>' . htmlspecialchars($_SESSION['login']) . '</b> ';
+    echo '<p>Connecté sous <b>' . htmlspecialchars($_SESSION['login']) . '</b> | Solde : ' . $_SESSION['solde'] . '€ ';
+    echo '| <a href="index.php?module=solde_refill&action=form">Recharger le solde</a>';
     echo '| <a href="index.php?module=connexion&action=deconnexion">Se déconnecter</a></p>';
     echo '<ul>
             <li><a href="index.php?module=buvettes">Buvettes</a></li>
            </ul>';
 } else {
-    echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
     echo '<p><a href="index.php?module=connexion&action=connexion">Se connecter</a></p>';
 }
 echo '</header>';
@@ -44,6 +44,11 @@ switch ($module) {
     case 'equipes':
         require_once('modules/mod_equipes/mod_equipes.php');
         $mod = new ModEquipes();
+        break;
+
+    case 'solde_refill':
+        require_once ('modules/mod_solde_refill/mod_solde_refill.php');
+        $mod = new ModSoldeRefill();
         break;
 
     default:

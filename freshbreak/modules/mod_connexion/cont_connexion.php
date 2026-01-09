@@ -47,8 +47,8 @@ class ContConnexion {
 
             if ($this->modele->verifierConnexion($login, $mdp)) {
                 $_SESSION['login'] = $login;  // ✅ L’utilisateur est connecté
+                $_SESSION['solde'] = $this->modele->getSolde($login);
                 header('Location: index.php'); // redirige vers l’accueil
-                exit;
             } else {
                 $this->vue->message("❌ Identifiant ou mot de passe incorrect.");
                 $this->vue->form_connexion();
