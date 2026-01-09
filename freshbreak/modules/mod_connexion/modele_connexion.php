@@ -32,6 +32,7 @@ public function ajouterUtilisateur($login, $password) {
 
         if ($resultat && password_verify($password, $resultat['password'])) {
             return true;
+            $_SESSION['login'] = $login;
         }
         return false;
     }

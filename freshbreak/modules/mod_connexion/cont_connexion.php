@@ -11,10 +11,7 @@ class ContConnexion {
         $this->vue = new VueConnexion();
         $this->modele = new ModeleConnexion();
 
-        // Démarre la session si ce n’est pas déjà fait
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+
     }
 
     // --- FORMULAIRE D’INSCRIPTION ---

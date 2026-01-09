@@ -11,14 +11,25 @@ class modele_creationBuvettes extends connexion
         $req->execute();
         return $req->fetchColumn() > 0;
     }
+        public function ajouterBuvette($nom)
+        {
+            $req = self::$bdd->prepare("INSERT INTO bar (nom) VALUES (:nom)");
+            $req->bindParam(':nom', $nom);
+            $req->execute();
 
-    public function ajouterBuvette($nom) {
+            $idBar = self::$bdd->lastInsertId();
 
-        $req = self::$bdd->prepare("INSERT INTO bar (nom) VALUES (:nom)");
-        $req->bindParam(':nom', $nom);
+            $gerant = $_SESSION['login'];
+
+            $req = self::$bdd->prepare("
+        INSERT INTO role (login_utilisateur, bar_associe, role_bar)
+        VALUES (:login_utilisateur, :bar_associe, 'gérant')
+    ");
+            $req->bindParam(':login_utilisateur', $gerant);
+            $req->bindParam(':bar_associe', $idBar);
+            $req->execute();
+        }
 
 
-        $req->execute();
-    }
 
 }

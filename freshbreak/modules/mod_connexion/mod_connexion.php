@@ -10,7 +10,7 @@ class ModConnexion {
     }
 
     public function exec() {
-       
+
         $action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
 
         switch ($action) {

@@ -14,6 +14,7 @@ class mod_creationBuvettes
 
     public function exec()
     {
+        var_dump($_SESSION['login']);
         $this->controleur->form_ajout_bar();
     }
 

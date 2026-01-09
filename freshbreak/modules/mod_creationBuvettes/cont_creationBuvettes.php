@@ -7,31 +7,37 @@ class cont_creationBuvettes
 {
     private $vue;
     private $modele;
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->vue = new vue_creationBuvettes();
         $this->modele = new modele_creationBuvettes();
-
-        // Démarre la session si ce n’est pas déjà fait
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
     }
 
-    public function form_ajout_bar() {
-        if (!empty($_POST['nom']) ) {
-            $nom = $_POST['nom'];
+    public function form_ajout_bar()
+    {
+        if (isset($_POST['nom'])) {
 
+            $nom = trim($_POST['nom']);
+
+            if ($nom === '') {
+                $this->vue->message("❌ Le nom de la buvette est obligatoire.");
+                return;
+            }
 
             if ($this->modele->nomexist($nom)) {
                 $this->vue->message("❌ Cette buvette existe déjà.");
-            } else {
-                $this->modele->ajouterBuvette($nom);
-                $this->vue->message("✅ Inscription réussie !");
-
+                return;
             }
+                if ($this->modele->ajouterBuvette($nom)) {
+                    $this->vue->message(" Buvette créée avec succès !");
+                } else {
+                    $this->vue->message(" Impossible de créer la buvette.");
+                }
+
+
         } else {
             $this->vue->form_inscription();
         }
     }
-
 }
