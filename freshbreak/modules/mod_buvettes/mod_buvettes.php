@@ -4,12 +4,11 @@ require_once('cont_buvettes.php');
 
 
 
-class mod_buvettes
-{
+class ModBuvettes {
     private $controleur;
 
     public function __construct() {
-        $this->controleur = new cont_buvettes();
+        $this->controleur = new ContBuvettes();
     }
 
     public function exec() {

@@ -3,8 +3,7 @@ if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('connexion.php');
 
 
-class modele_creationBuvettes extends connexion
-{
+class ModeleCreationBuvettes extends connexion {
     public function nomexist($nom) {
         $req = self::$bdd->prepare("SELECT COUNT(*) FROM bar WHERE nom = :nom");
         $req->bindParam(':nom', $nom);

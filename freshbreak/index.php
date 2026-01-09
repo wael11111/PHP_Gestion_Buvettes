@@ -36,7 +36,7 @@ echo '</header>';
     switch ($module) {
         case 'creationBuvettes':
             require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
-            $mod = new mod_creationBuvettes();
+            $mod = new ModCreationBuvettes();
             break;
 
         case 'connexion':
@@ -44,10 +44,10 @@ echo '</header>';
             $mod = new ModConnexion();
             break;
 
-        case 'Buvettes':
-            require_once('modules/mod_creationBuvettes/mod_buvette.php');
-            $mod = new Mod_creationBuvettes();
-            break;
+//        case 'Buvettes':
+//            require_once('modules/mod_creationBuvettes/mod_buvette.php');
+//            $mod = new ModBuvettes();
+//            break;
 
 
     }
