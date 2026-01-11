@@ -49,6 +49,11 @@
             $mod = new ModSoldeRefill();
             $mod->exec();
             break;
+        case 'stock':
+            require_once('modules/mod_stock/mod_stock.php');
+            $mod = new ModStock();
+            $mod->exec();
+            break;
         //        case 'Buvettes':
         //            require_once('modules/mod_creationBuvettes/mod_buvette.php');
         //            $mod = new ModBuvettes();
