@@ -17,4 +17,7 @@ class ModCreationBuvettes {
         $this->controleur->form_ajout_bar();
     }
 
+    public function print_content() {
+        return $this->controleur->print_content();
+    }
 }

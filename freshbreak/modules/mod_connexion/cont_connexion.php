@@ -61,6 +61,10 @@ class ContConnexion {
         header('Location: index.php');
         exit;
     }
+
+    public function print_content() {
+        return $this->vue->close_buffer();
+    }
 }
 ?>
 

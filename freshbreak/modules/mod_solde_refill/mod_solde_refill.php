@@ -27,5 +27,9 @@ class ModSoldeRefill {
                 break;
         }
     }
+
+    public function print_content() {
+        return $this->controller->print_content();
+    }
 }
 ?>

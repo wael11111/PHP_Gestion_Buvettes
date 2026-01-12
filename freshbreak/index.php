@@ -9,7 +9,7 @@
     connexion::initConnextion();
 
     echo '<header>';
-    echo '<h1>Freshbreak</h1>';
+    echo '<h1>FreshBreak</h1>';
 
     // Vérifie si un utilisateur est connecté
     if (isset($_SESSION['login'])) {
@@ -26,8 +26,6 @@
     echo '</header>';
 
 
-
-
     // Détermination du module
     $module = isset($_GET['module']) ? $_GET['module'] : 'error';
 
@@ -36,23 +34,24 @@
             require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
             $mod = new ModCreationBuvettes();
             $mod->exec();
+            $template_content = $mod->print_content();
             break;
 
         case 'connexion':
             require_once('modules/mod_connexion/mod_connexion.php');
             $mod = new ModConnexion();
             $mod->exec();
+            $template_content = $mod->print_content();
             break;
 
         case 'solde_refill':
             require_once('modules/mod_solde_refill/mod_solde_refill.php');
             $mod = new ModSoldeRefill();
             $mod->exec();
+            $template_content = $mod->print_content();
             break;
-        //        case 'Buvettes':
-        //            require_once('modules/mod_creationBuvettes/mod_buvette.php');
-        //            $mod = new ModBuvettes();
-        //            break;
     }
+
+    include_once ("template.php");
 ?>
 
