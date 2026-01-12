@@ -2,11 +2,11 @@
 if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('cont_template.php');
 
-class mod_template {
+class Mod_template {
     private $controller;
 
     public function __construct() {
-        $this->controller = new ContSoldeRefill();
+        $this->controller = new Cont_template();
     }
 
     public function exec() {
