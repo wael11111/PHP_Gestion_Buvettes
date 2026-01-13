@@ -13,30 +13,38 @@ class ModBuvettes {
 
     public function exec() {
 
-        $action = isset($_GET['action']) ? $_GET['action'] : 'buvettes';
+        $action = isset($_GET['action']) ? $_GET['action'] : 'liste';
+
+        if (isset($_GET['bar_id'])) {
+            $_SESSION['bar_id'] = intval($_GET['bar_id']);
+        }
 
         switch ($action) {
+
             case 'stock':
-                $this->controleur->form_inscription();
+                $this->controleur->afficherStock(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
                 break;
 
             case 'bilan':
-                $this->controleur->form_connexion();
-                break;
-
-            case 'changer de buvette':
-                $this->controleur->deconnexion();
+                $this->controleur->afficherBilan(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
                 break;
 
             case 'payer':
-                $this->controleur->deconnexion();
+                $this->controleur->payer(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
                 break;
 
+            case 'changer':
+                unset($_SESSION['bar_id']);
+                $this->controleur->liste();
+                return;
 
             default:
-                echo "<p>Action inconnue.</p>";
-                $this->controleur->form_connexion();
+                $this->controleur->liste();
                 break;
+        }
+
+        if (isset($_SESSION['bar_id'])) {
+            $this->controleur->menu();
         }
     }
 

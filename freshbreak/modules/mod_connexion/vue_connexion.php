@@ -15,6 +15,8 @@ class VueConnexion {
         </form>';
     }
 
+
+
     public function form_connexion() {
         echo '
         <h2>Connexion</h2>
