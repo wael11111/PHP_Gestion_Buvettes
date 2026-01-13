@@ -7,12 +7,16 @@
 
     <body>
         <header>
-
+            <h1>FreshBreak</h1>
+            <?php
+                echo $connexion_info->affiche();
+            ?>
+            <nav>
+                <?php
+                    echo $menu_nav->affiche();
+                ?>
+            </nav>
         </header>
-
-        <nav>
-
-        </nav>
 
         <main>
             <?php

@@ -1,6 +1,6 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
-require_once ("./Vue_generique.php");
+require_once ("./vue_generique.php");
 
 class VueCreationBuvettes extends Vue_generique {
     public function __construct() {
