@@ -14,5 +14,20 @@ class cont_buvettes
 
     }
 
+    public function menu(){
+        $this->vue->menu();
+    }
+    public function liste(){
+        $this-> vue -> afficher_buvette($this->modele-> getListe());
+    }
+    public function afficherStock(){}
+
+    public function afficherBilan(){}
+
+    public function payer(){
+    }
+
+    public function retour(){}
+
 
 }

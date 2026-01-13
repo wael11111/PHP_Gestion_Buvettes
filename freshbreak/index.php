@@ -32,26 +32,32 @@ echo '</header>';
 // Détermination du module
 
     $module = isset($_GET['module']) ? $_GET['module'] : 'error';
+    $mod =null;
 
-    switch ($module) {
-        case 'creationBuvettes':
-            require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
-            $mod = new mod_creationBuvettes();
-            break;
 
-        case 'connexion':
-            require_once('modules/mod_connexion/mod_connexion.php');
-            $mod = new ModConnexion();
-            break;
+        switch ($module) {
+            case 'creationBuvettes':
+                require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
+                $mod = new mod_creationBuvettes();
+                $mod->exec();
+                break;
 
-        case 'Buvettes':
-            require_once('modules/mod_creationBuvettes/mod_buvette.php');
-            $mod = new Mod_creationBuvettes();
-            break;
+            case 'connexion':
+                require_once('modules/mod_connexion/mod_connexion.php');
+                $mod = new ModConnexion();
+                $mod->exec();
+                break;
+
+            case 'buvettes':
+                require_once('modules/mod_buvettes/mod_buvettes.php');
+                $mod = new mod_buvettes();
+                $mod->exec();
+                break;
+
 
 
     }
-    $mod->exec();
+
 
 ?>
 
