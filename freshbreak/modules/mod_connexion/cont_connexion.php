@@ -36,9 +36,7 @@ class ContConnexion {
 
     // --- FORMULAIRE DE CONNEXION ---
     public function form_connexion() {
-        if (isset($_SESSION['login'])) {
-            $this->vue->deja_connecte($_SESSION['login']);
-        } elseif (!empty($_POST['login']) && !empty($_POST['mdp'])) {
+        if (!isset($_SESSION['login']) && !empty($_POST['login']) && !empty($_POST['mdp'])) {
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
 
@@ -50,7 +48,7 @@ class ContConnexion {
                 $this->vue->message("❌ Identifiant ou mot de passe incorrect.");
                 $this->vue->form_connexion();
             }
-        } else {
+        } else if (!isset($_SESSION['login'])) {
             $this->vue->form_connexion();
         }
     }
