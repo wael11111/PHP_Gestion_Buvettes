@@ -6,7 +6,7 @@
     require_once('connexion.php');
 
     // Initialisation de la connexion à la BDD
-    connexion::initConnextion();
+    connexion::initConnexion();
 
     echo '<header>';
     echo '<h1>Freshbreak</h1>';
@@ -54,10 +54,10 @@
             $mod = new ModStock();
             $mod->exec();
             break;
-        //        case 'Buvettes':
-        //            require_once('modules/mod_creationBuvettes/mod_buvette.php');
-        //            $mod = new ModBuvettes();
-        //            break;
+        case 'Buvettes':
+            require_once('modules/mod_buvettes/mod_buvettes.php');
+            $mod = new ModBuvettes();
+            break;
     }
 ?>
 

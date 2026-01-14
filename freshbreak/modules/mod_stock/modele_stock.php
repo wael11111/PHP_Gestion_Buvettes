@@ -1,14 +1,17 @@
 <?php
+if (!defined('APP_SECURE')) die('Accès interdit.');
+
+require_once('connexion.php');
 
 class ModeleStock {
 
     public static function getStocks() {
-        $pdo = connexion::getConnexion();
+        $pdo = connexion::initConnexion();
 
         $sql = "
-            SELECT p.nom_produit, s.quantite
-            FROM produit p
-            JOIN stock s ON p.id_produit = s.id_produit
+            SELECT p.nom, s.quantite
+            FROM stock s
+            JOIN produit p ON s.id_produit = p.id
         ";
 
         $stmt = $pdo->prepare($sql);
