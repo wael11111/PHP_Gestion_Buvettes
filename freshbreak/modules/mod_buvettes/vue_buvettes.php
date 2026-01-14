@@ -1,7 +1,7 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
 
-class vue_buvettes
+class VueBuvettes
 {
     public function afficher_buvette(array $tab) {
 

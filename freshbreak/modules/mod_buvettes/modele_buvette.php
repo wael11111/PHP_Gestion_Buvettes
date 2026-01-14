@@ -3,7 +3,7 @@ if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('connexion.php');
 
 
-class modele_buvette extends connexion
+class ModeleBuvette extends connexion
 {
 
     public function getListe() {

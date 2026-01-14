@@ -34,7 +34,7 @@
         switch ($module) {
             case 'creationBuvettes':
                 require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
-                $mod = new mod_creationBuvettes();
+                $mod = new ModCreationBuvettes();
                 $mod->exec();
                 break;
 
@@ -46,7 +46,7 @@
 
             case 'buvettes':
                 require_once('modules/mod_buvettes/mod_buvettes.php');
-                $mod = new mod_buvettes();
+                $mod = new ModBuvettes();
                 $mod->exec();
                 break;
 
