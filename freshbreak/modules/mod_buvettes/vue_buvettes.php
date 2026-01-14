@@ -1,8 +1,11 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
+require_once("./vue_generique.php");
 
-class VueBuvettes
-{
+class VueBuvettes extends Vue_generique {
+    public function __construct() {
+        parent::__construct();
+    }
     public function afficher_buvette(array $tab) {
 
         if (empty($tab)) {

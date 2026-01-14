@@ -38,6 +38,7 @@
             require_once('modules/mod_buvettes/mod_buvettes.php');
             $mod = new ModBuvettes();
             $mod->exec();
+            $template_content = $mod->print_content();
             break;
     }
 
