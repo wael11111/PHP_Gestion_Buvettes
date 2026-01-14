@@ -35,4 +35,8 @@ class ContCreationBuvettes {
             $this->vue->form_inscription();
         }
     }
+
+    public function print_content() {
+        return $this->vue->close_buffer();
+    }
 }
