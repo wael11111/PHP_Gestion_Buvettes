@@ -28,5 +28,9 @@ class ContSoldeRefill {
             $this->vue->error();
         }
     }
+
+    public function print_content() {
+        return $this->vue->close_buffer();
+    }
 }
 ?>

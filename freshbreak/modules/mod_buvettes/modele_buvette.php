@@ -1,15 +1,18 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
-require_once('freshbreak/connexion.php');
+require_once('connexion.php');
 
-class ModeleBuvette extends connexion {
 
-    public function getAllBuvettes() {
-        self::initConnexion();
+class ModeleBuvette extends connexion
+{
 
-        $req = self::$bdd->prepare("SELECT id, nom FROM bar");
-        $req->execute();
+    public function getListe() {
+        $requetes = 'select * from bar;';
+        $requetesPrepare = self::$bdd -> prepare($requetes);
+        $requetesPrepare ->execute();
+        $tables = $requetesPrepare -> fetchAll();
 
-        return $req->fetchAll(PDO::FETCH_ASSOC);
+        return $tables;
     }
+
 }

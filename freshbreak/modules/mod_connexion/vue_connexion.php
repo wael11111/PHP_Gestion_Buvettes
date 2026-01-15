@@ -1,7 +1,11 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
+require_once ("./vue_generique.php");
 
-class VueConnexion {
+class VueConnexion extends Vue_generique {
+    public function __construct() {
+        parent::__construct();
+    }
 
     public function form_inscription() {
         echo '
@@ -14,6 +18,8 @@ class VueConnexion {
             <button type="submit">S’inscrire</button>
         </form>';
     }
+
+
 
     public function form_connexion() {
         echo '

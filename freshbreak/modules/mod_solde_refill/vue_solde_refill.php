@@ -1,7 +1,12 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
+require_once ('./vue_generique.php');
 
-class VueSoldeRefill {
+class VueSoldeRefill extends Vue_generique {
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function form($solde) {
         echo '
         <h2>Rechargement du compte</h2>
