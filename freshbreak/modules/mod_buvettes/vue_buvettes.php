@@ -23,7 +23,7 @@ class VueBuvettes extends Vue_generique {
         echo '<select name="bar_id" id="bar_id" required>';
         echo '<option value="">-- Sélectionner --</option>';
         foreach ($tab as $item) {
-            echo '<option value="' . htmlspecialchars($item['id']) . '">';
+            echo '<option value="' . htmlspecialchars($item['id_bar']) . '">';
             echo htmlspecialchars($item['nom']);
             echo '</option>';
         }

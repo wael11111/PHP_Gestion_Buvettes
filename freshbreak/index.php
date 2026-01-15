@@ -40,6 +40,13 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
+
+        case 'gestion_profils':
+            require_once('modules/mod_gestion_profils/mod_gestion_profils.php');
+            $mod = new ModGestionProfils();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
     }
 
     $connexion_info = new Comp_connexion_info();
