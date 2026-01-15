@@ -26,6 +26,10 @@ class ContBuvettes {
     public function payer(){
     }
 
+    public function choix(){
+        $this->vue->choice();
+    }
+
     public function print_content() {
         return $this->vue->close_buffer();
     }

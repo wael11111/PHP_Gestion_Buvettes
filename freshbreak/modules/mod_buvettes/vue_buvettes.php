@@ -6,6 +6,12 @@ class VueBuvettes extends Vue_generique {
     public function __construct() {
         parent::__construct();
     }
+
+    public function choice(){
+       echo '<a href="index.php?module=buvettes&action=liste">Buvettes</a>
+|
+<a href="index.php?module=creationBuvettes&action=ajout">Créer buvette</a>';
+    }
     public function afficher_buvette(array $tab) {
 
         if (empty($tab)) {

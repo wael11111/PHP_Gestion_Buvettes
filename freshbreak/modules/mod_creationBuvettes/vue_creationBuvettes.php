@@ -9,7 +9,7 @@ class VueCreationBuvettes extends Vue_generique {
 
     public function form_inscription() {
         echo '
-        <h2>Inscription</h2>
+        <h2>Ajout Buvette</h2>
         <form method="post" action="index.php?module=creationBuvettes">
             <label>Nom Buvette :</label>
             <input type="text" name="nom" required><br>

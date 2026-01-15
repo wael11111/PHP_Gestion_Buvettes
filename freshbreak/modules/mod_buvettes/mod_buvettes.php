@@ -11,26 +11,36 @@ class ModBuvettes {
         $this->controleur = new ContBuvettes();
     }
 
-    public function exec() {
+    public function exec()
+    {
+        // action unique
+        $action = $_GET['action'] ?? 'choix';
 
-        $action = isset($_GET['action']) ? $_GET['action'] : 'liste';
-
+        // mémorisation du bar sélectionné
         if (isset($_GET['bar_id'])) {
             $_SESSION['bar_id'] = intval($_GET['bar_id']);
         }
 
         switch ($action) {
 
+            case 'choix':
+                $this->controleur->choix();
+                break;
+
+            case 'liste':
+                $this->controleur->liste();
+                break;
+
             case 'stock':
-                $this->controleur->afficherStock(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
+                $this->controleur->afficherStock($_SESSION['bar_id'] ?? null);
                 break;
 
             case 'bilan':
-                $this->controleur->afficherBilan(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
+                $this->controleur->afficherBilan($_SESSION['bar_id'] ?? null);
                 break;
 
             case 'payer':
-                $this->controleur->payer(isset($_SESSION['bar_id']) ? $_SESSION['bar_id'] : null);
+                $this->controleur->payer($_SESSION['bar_id'] ?? null);
                 break;
 
             case 'changer':
@@ -39,10 +49,12 @@ class ModBuvettes {
                 return;
 
             default:
-                $this->controleur->liste();
+                echo '<p>Action inconnue</p>';
+                $this->controleur->choix();
                 break;
         }
 
+        // menu affiché uniquement si un bar est sélectionné
         if (isset($_SESSION['bar_id'])) {
             $this->controleur->menu();
         }
