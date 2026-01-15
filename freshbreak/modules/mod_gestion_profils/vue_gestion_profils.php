@@ -18,7 +18,6 @@ class VueGestionProfils extends Vue_generique {
             <select name="role" required>
                 <option value="client">Client</option>
                 <option value="barman">Barman</option>
-                <option value="gestionnaire">Gestionnaire</option>
             </select><br>
 
             <button type="submit">Ajouter</button>

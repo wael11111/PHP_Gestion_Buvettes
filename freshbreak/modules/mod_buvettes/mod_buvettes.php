@@ -41,7 +41,8 @@ class ModBuvettes {
 
             case 'payer':
                 $this->controleur->payer($_SESSION['bar_id'] ?? null);
-                break;
+                break
+             ;
 
             case 'changer':
                 unset($_SESSION['bar_id']);
