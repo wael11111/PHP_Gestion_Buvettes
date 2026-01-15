@@ -1,9 +1,9 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
-require_once('vue_template.php');
-require_once('modele_template.php');
+require_once('vue_inbox.php');
+require_once('modele_inbox.php');
 
-class Cont_template {
+class Cont_inbox {
     private $modele;
     private $vue;
 

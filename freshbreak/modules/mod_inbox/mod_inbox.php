@@ -1,8 +1,8 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
-require_once('cont_template.php');
+require_once('cont_inbox.php');
 
-class Mod_template {
+class Mod_inbox {
     private $controller;
 
     public function __construct() {
