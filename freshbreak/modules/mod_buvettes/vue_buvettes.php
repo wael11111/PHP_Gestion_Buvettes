@@ -42,6 +42,7 @@ class VueBuvettes extends Vue_generique {
 
     public function menu() {
         echo '<ul>
+            <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
             <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
             <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
