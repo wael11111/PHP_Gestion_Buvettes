@@ -54,7 +54,7 @@
             break;
 
         case 'commande':
-            require_once('modules/mod_commande/mod_commande.php');
+            require_once('modules/mod_commandes/mod_commande.php');
             $mod = new ModCommande();
             $mod->exec();
             $template_content = $mod->print_content();
