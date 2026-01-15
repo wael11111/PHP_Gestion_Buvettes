@@ -1,23 +1,28 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
-?>
+require_once('./vue_generique.php');
 
-<h2>Stock</h2>
+class VueStock extends Vue_generique {
 
-<?php if (empty($stocks)) : ?>
-    <p>Aucun produit en stock.</p>
-<?php else : ?>
-    <table>
-        <tr>
-            <th>Produit</th>
-            <th>Quantité restante</th>
-        </tr>
+    public function __construct() {
+        parent::__construct();
+    }
 
-        <?php foreach ($stocks as $stock) : ?>
-            <tr>
-                <td><?= htmlspecialchars($stock['nom']) ?></td>
-                <td><?= htmlspecialchars($stock['quantite']) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-<?php endif; ?>
+    public function afficher($stocks) {
+        echo "<h2>Stocks</h2>";
+
+        if (empty($stocks)) {
+            echo "<p>Aucun stock disponible.</p>";
+        } else {
+            echo "<ul>";
+            foreach ($stocks as $s) {
+                echo "<li>"
+                        . htmlspecialchars($s['produit'])
+                        . " : "
+                        . (int)$s['quantite']
+                        . "</li>";
+            }
+            echo "</ul>";
+        }
+    }
+}
