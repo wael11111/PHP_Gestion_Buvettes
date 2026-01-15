@@ -7,7 +7,7 @@ class connexion {
 	
 	public function __construct(){}
 	
-	public static function initConnextion()  {
+	public static function initConnexion()  {
 		self::$bdd =new PDO(
         'mysql:host=localhost;dbname=dutinfopw201627;charset=utf8',
         'dutinfopw201627',

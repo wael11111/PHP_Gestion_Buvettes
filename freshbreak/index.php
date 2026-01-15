@@ -8,7 +8,7 @@
     require_once('composants/menu_nav/comp_menu_nav.php');
 
     // Initialisation de la connexion à la BDD
-    connexion::initConnextion();
+    connexion::initConnexion();
 
     // Détermination du module
     $module = isset($_GET['module']) ? $_GET['module'] : 'connexion';
@@ -40,7 +40,12 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
-
+        case 'stock':
+            require_once('modules/mod_stock/mod_stock.php');
+            $mod = new ModStock();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
         case 'gestion_profils':
             require_once('modules/mod_gestion_profils/mod_gestion_profils.php');
             $mod = new ModGestionProfils();
