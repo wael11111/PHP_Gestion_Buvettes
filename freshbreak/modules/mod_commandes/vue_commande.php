@@ -15,12 +15,12 @@ class VueCommande extends Vue_generique {
 
         echo '<h2>Nouvelle commande</h2>
         <form method="post" action="index.php?module=commande&action=valider_client">
-            <label>Sélectionner un client :</label><br>
+            <label>Client :</label><br>
             <select name="login_client" required>
                 <option value="">-- Choisir --</option>';
 
         foreach ($clients as $c) {
-            echo '<option value="' . htmlspecialchars($c['login']) . '">' . htmlspecialchars($c['login']) . ' (Solde : ' . $c['solde'] . '€)</option>';
+            echo '<option value="' . $c['login'] . '">' . $c['login'] . ' (' . $c['solde'] . '€)</option>';
         }
 
         echo '</select><br><br>
@@ -29,47 +29,41 @@ class VueCommande extends Vue_generique {
     }
 
     public function afficherPanier($produits, $panier, $client, $solde) {
-        echo '<h2>Commande de ' . htmlspecialchars($client) . '</h2>
-        <p>Solde disponible : ' . $solde . '€</p>';
+        echo '<h2>Commande de ' . $client . '</h2><p>Solde : ' . $solde . '€</p>';
 
         if (!empty($panier)) {
             $total = 0;
-            echo '<h3>Panier actuel</h3><ul>';
-
+            echo '<h3>Panier</h3><ul>';
             foreach ($panier as $p) {
-                $st = $p['prix'] * $p['qte'];
-                $total += $st;
-                echo '<li>' . htmlspecialchars($p['nom']) . ' - ' . $p['prix'] . '€ x ' . $p['qte'] . ' = ' . $st . '€ <a href="index.php?module=commande&action=retirer&id=' . $p['id'] . '">[Retirer]</a></li>';
+                $total += $p['prix'] * $p['qte'];
+                echo '<li>' . $p['nom'] . ' - ' . $p['prix'] . '€ x ' . $p['qte'] . ' <a href="index.php?module=commande&action=retirer&id=' . $p['id'] . '">[Retirer]</a></li>';
             }
-
-            echo '</ul><p><strong>Total : ' . $total . '€</strong></p>';
+            echo '</ul><p>Total : ' . $total . '€</p>';
 
             if ($solde >= $total) {
-                echo '<a href="index.php?module=commande&action=valider"><button>Valider la commande</button></a> ';
+                echo '<a href="index.php?module=commande&action=valider"><button>Valider</button></a> ';
             } else {
-                echo '<p style="color:red;">Solde insuffisant pour valider</p>';
+                echo '<p>Solde insuffisant</p>';
             }
         }
 
-        echo '<h3>Ajouter un produit</h3>';
-
+        echo '<h3>Produits</h3>';
         if (empty($produits)) {
             echo '<p>Aucun produit en stock.</p>';
         } else {
             echo '<ul>';
             foreach ($produits as $p) {
-                echo '<li>' . htmlspecialchars($p['nom_produit']) . ' - ' . $p['prix_vente'] . '€ (Stock : ' . $p['quantite'] . ')
+                echo '<li>' . $p['nom_produit'] . ' - ' . $p['prix_vente'] . '€ (Stock : ' . $p['quantite'] . ')
                 <form method="post" action="index.php?module=commande&action=ajouter" style="display:inline;">
                     <input type="hidden" name="id_produit" value="' . $p['id_produit'] . '">
                     <input type="number" name="quantite" value="1" min="1" max="' . $p['quantite'] . '" style="width:50px;">
                     <button type="submit">Ajouter</button>
-                </form>
-                </li>';
+                </form></li>';
             }
             echo '</ul>';
         }
 
-        echo '<br><a href="index.php?module=commande&action=annuler"><button>Annuler la commande</button></a>';
+        echo '<br><a href="index.php?module=commande&action=annuler"><button>Annuler</button></a>';
     }
 
     public function message($texte) {
