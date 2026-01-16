@@ -58,6 +58,14 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
+
+        case 'commande':
+            require_once('modules/mod_commandes/mod_commande.php');
+            $mod = new ModCommande();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
+
     }
 
     $connexion_info = new Comp_connexion_info();
