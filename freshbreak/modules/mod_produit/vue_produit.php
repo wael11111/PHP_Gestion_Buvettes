@@ -33,7 +33,7 @@ class Vue_produit extends Vue_generique {
     public function liste_produits($produits) {
         echo '<h2>Produits disponibles</h2><ul>';
         foreach ($produits as $p) {
-            echo "<li>{$p['nom']} – {$p['prix']} €</li>";
+            echo "<li>{$p['nom_produit']} – {$p['prix_vente']} €</li>";
         }
         echo '</ul>';
     }
