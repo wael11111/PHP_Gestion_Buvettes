@@ -47,6 +47,7 @@ class VueBuvettes extends Vue_generique {
     }
     public function menu_gérant() {
         echo '<ul>
+            <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
             <li><a href="index.php?module=buvettes&action=stock">stock</a></li>
             <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
@@ -55,9 +56,10 @@ class VueBuvettes extends Vue_generique {
     }
     public function menu_barman(){
         echo '<ul>
+            <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
             <li><a href="index.php?module=buvettes&action=stock">stock</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
-            <li><a href="index.php?module=buvettes&action=commande">commande</a></li>
+            
         </ul>';
     }
 
