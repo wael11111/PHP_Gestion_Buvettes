@@ -8,8 +8,12 @@ class Cont_template {
     private $vue;
 
     public function __construct() {
-        $this->modele = new Modele_inbox();
-        $this->vue = new Vue_inbox();
+        $this->modele = new Modele_template();
+        $this->vue = new Vue_template();
+    }
+
+    public function print_content() {
+        return $this->vue->close_buffer();
     }
 }
 ?>

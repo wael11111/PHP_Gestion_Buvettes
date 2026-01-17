@@ -6,13 +6,11 @@ class Mod_template {
     private $controller;
 
     public function __construct() {
-        $this->controller = new Cont_inbox();
+        $this->controller = new Cont_template();
     }
 
     public function exec() {
-
         $action = isset($_GET['action']) ? $_GET['action'] : '[default]';
-
         switch ($action) {
             case '[case]':
                 break;
@@ -21,6 +19,10 @@ class Mod_template {
                 echo "<p>Action inconnue.</p>";
                 break;
         }
+    }
+
+    public function print_content() {
+        return $this->controller->print_content();
     }
 }
 ?>

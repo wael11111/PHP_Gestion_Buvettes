@@ -28,6 +28,7 @@ class ContConnexion {
                 $this->modele->ajouterUtilisateur($login, $mdp);
                 $_SESSION['login'] = $login;
                 $_SESSION['solde'] = $this->modele->getSolde($login);
+                $_SESSION['admin'] = false;
                 header('Location: index.php');
             }
         } else {
@@ -44,6 +45,10 @@ class ContConnexion {
             if ($this->modele->verifierConnexion($login, $mdp)) {
                 $_SESSION['login'] = $login;  // ✅ L’utilisateur est connecté
                 $_SESSION['solde'] = $this->modele->getSolde($login);
+                if ($this->modele->getAdmin() == $login)
+                    $_SESSION['admin'] = true;
+                else
+                    $_SESSION['admin'] = false;
                 header('Location: index.php'); // redirige vers l’accueil
             } else {
                 $this->vue->message("❌ Identifiant ou mot de passe incorrect.");
