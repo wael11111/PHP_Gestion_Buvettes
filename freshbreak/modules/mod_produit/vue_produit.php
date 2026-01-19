@@ -8,7 +8,7 @@ class Vue_produit extends Vue_generique {
         parent::__construct();
     }
 
-    public function form_produit() {
+    public function form_produit($fournisseurs) {
         echo '
     <h2>Ajout produit</h2>
     <form method="post" action="index.php?module=produit">
@@ -22,12 +22,26 @@ class Vue_produit extends Vue_generique {
         <label>Prix vente :</label>
         <input type="number" step="0.01" name="prix_vente" required><br>
 
-        <label>Fournisseur (id) :</label>
-        <input type="number" name="fournisseur" required><br>
+        <label>Fournisseur existant :</label>
+        <select name="fournisseur_id">
+            <option value="">-- Aucun --</option>';
+
+        foreach ($fournisseurs as $f) {
+            echo '<option value="'.$f['id_fournisseur'].'">'
+                .htmlspecialchars($f['nom'])
+                .'</option>';
+        }
+
+        echo '
+        </select><br><br>
+
+        <label>Nouveau fournisseur :</label><br>
+        <input type="text" name="fournisseur_nom" placeholder="Nom"><br>
+        <input type="email" name="fournisseur_email" placeholder="Email"><br>
+        <input type="text" name="fournisseur_tel" placeholder="Téléphone"><br><br>
 
         <button type="submit">Ajouter</button>
-    </form>
-    ';
+    </form>';
     }
 
     public function liste_produits($produits) {

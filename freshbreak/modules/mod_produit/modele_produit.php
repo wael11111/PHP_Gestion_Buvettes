@@ -13,37 +13,61 @@ class Modele_produit extends connexion {
         return $req->fetchColumn() > 0;
     }
 
-    public function ajouterProduit($nom, $prixAchat, $prixVente, $fournisseur) {
-        $reqCheck = self::$bdd->prepare("SELECT COUNT(*) FROM fournisseur WHERE id_fournisseur = :id");
-        $reqCheck->bindParam(':id', $fournisseur);
-        $reqCheck->execute();
-
-        if ($reqCheck->fetchColumn() == 0) {
-            $reqFourn = self::$bdd->prepare("
-                INSERT INTO fournisseur (id_fournisseur, nom, email, telephone) 
-                VALUES (:id, 'Fournisseur temporaire', 'temp@temp.com', '0000000000')
-                ON DUPLICATE KEY UPDATE nom = nom
-            ");
-            $reqFourn->bindParam(':id', $fournisseur);
-            $reqFourn->execute();
-        }
-
+    public function ajouterProduit($nom, $prixAchat, $prixVente, $idFournisseur) {
         $req = self::$bdd->prepare("
             INSERT INTO produit (nom_produit, prix_achat, prix_vente, fournisseur)
-            VALUES (:nom, :pa, :pv, :fournisseur)
+            VALUES (:nom, :pa, :pv, :f)
         ");
-        $req->bindParam(':nom', $nom);
-        $req->bindParam(':pa', $prixAchat);
-        $req->bindParam(':pv', $prixVente);
-        $req->bindParam(':fournisseur', $fournisseur);
-        $req->execute();
+        $req->execute([
+            ':nom' => $nom,
+            ':pa' => $prixAchat,
+            ':pv' => $prixVente,
+            ':f'  => $idFournisseur
+        ]);
     }
 
     public function getProduits() {
         $req = self::$bdd->query("
-            SELECT p.nom_produit, p.prix_vente
-            FROM produit p
+            SELECT nom_produit, prix_vente
+            FROM produit
         ");
         return $req->fetchAll();
+    }
+
+    public function getFournisseurs() {
+        $req = self::$bdd->query("
+            SELECT id_fournisseur, nom
+            FROM fournisseur
+            ORDER BY nom
+        ");
+        return $req->fetchAll();
+    }
+
+    public function getFournisseurByInfos($nom, $email, $tel) {
+        $req = self::$bdd->prepare("
+            SELECT * FROM fournisseur
+            WHERE nom = :nom AND email = :email AND telephone = :tel
+        ");
+        $req->execute([
+            ':nom' => $nom,
+            ':email' => $email,
+            ':tel' => $tel
+        ]);
+
+        return $req->fetch();
+    }
+
+    public function ajouterFournisseur($nom, $email, $tel) {
+        $req = self::$bdd->prepare("
+            INSERT INTO fournisseur (nom, email, telephone)
+            VALUES (:nom, :email, :tel)
+        ");
+        $req->execute([
+            ':nom' => $nom,
+            ':email' => $email,
+            ':tel' => $tel
+        ]);
+
+        return self::$bdd->lastInsertId();
     }
 }

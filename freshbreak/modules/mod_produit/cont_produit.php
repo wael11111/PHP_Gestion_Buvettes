@@ -19,7 +19,11 @@ class Cont_produit {
             $nom = trim($_POST['nom_produit']);
             $prixAchat = $_POST['prix_achat'];
             $prixVente = $_POST['prix_vente'];
-            $fournisseur = $_POST['fournisseur'];
+
+            $fournisseurId = $_POST['fournisseur_id'] ?? null;
+            $fNom   = trim($_POST['fournisseur_nom'] ?? '');
+            $fEmail = trim($_POST['fournisseur_email'] ?? '');
+            $fTel   = trim($_POST['fournisseur_tel'] ?? '');
 
             if ($nom === '') {
                 $this->vue->message("Nom du produit obligatoire.");
@@ -36,18 +40,39 @@ class Cont_produit {
                 return;
             }
 
+            $idFournisseurFinal = null;
+
+            if (!empty($fournisseurId)) {
+                $idFournisseurFinal = $fournisseurId;
+            } else {
+                if ($fNom && $fEmail && $fTel) {
+                    $fournisseur = $this->modele->getFournisseurByInfos($fNom, $fEmail, $fTel);
+
+                    if ($fournisseur) {
+                        $idFournisseurFinal = $fournisseur['id_fournisseur'];
+                    } else {
+                        $idFournisseurFinal = $this->modele->ajouterFournisseur($fNom, $fEmail, $fTel);
+                    }
+                } else {
+                    $this->vue->message("Veuillez sélectionner ou renseigner un fournisseur.");
+                    return;
+                }
+            }
+
             $this->modele->ajouterProduit(
                 $nom,
                 $prixAchat,
                 $prixVente,
-                $fournisseur
+                $idFournisseurFinal
             );
 
             $this->vue->message("Produit ajouté.");
         }
 
+        $fournisseurs = $this->modele->getFournisseurs();
         $produits = $this->modele->getProduits();
-        $this->vue->form_produit();
+
+        $this->vue->form_produit($fournisseurs);
         $this->vue->liste_produits($produits);
     }
 
