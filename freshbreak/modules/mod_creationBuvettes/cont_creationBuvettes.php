@@ -6,33 +6,89 @@ require_once('modele_creationBuvettes.php');
 class ContCreationBuvettes {
     private $vue;
     private $modele;
-    public function __construct()
-    {
+    public function __construct() {
         $this->vue = new VueCreationBuvettes();
         $this->modele = new ModeleCreationBuvettes();
     }
 
-    public function form_ajout_bar()
-    {
-        if (isset($_POST['nom'])) {
+    public function create_request() {
+        $nom = trim($_POST['nom']);
+        if ($nom == '') {
+            $this->vue->message("❌ Le nom de la buvette est obligatoire.");
+            return;
+        }
+        if ($this->modele->nomexist($nom)) {
+            $this->vue->message("❌ Cette buvette existe déjà.");
+            return;
+        }
+        if (pathinfo($_FILES['doc1']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc2']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc3']['name'],PATHINFO_EXTENSION) != 'pdf') {
+            $this->vue->request_submit_failure();
+            return;
+        }
+        //TODO:ajouter une vérif pour éviter de pouvoir spamer les demandes pour la création d'un même bar
+        $file_name1 = $this->generate_file_name($nom,'doc1');
+        $file_name2 = $this->generate_file_name($nom,'doc2');
+        $file_name3 = $this->generate_file_name($nom,'doc3');
 
-            $nom = trim($_POST['nom']);
+//        var_dump($_FILES['doc1']['error']);
+//        var_dump($_FILES['doc2']['error']);
+//        var_dump($_FILES['doc3']['error']);
 
-            if ($nom == '') {
-                $this->vue->message("❌ Le nom de la buvette est obligatoire.");
-                return;
-            }
+//        var_dump(move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1));
+//        var_dump(move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2));
+//        var_dump(move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3));
 
-            if ($this->modele->nomexist($nom)) {
-                $this->vue->message("❌ Cette buvette existe déjà.");
-                return;
-            }
-                 $this->modele->ajouterBuvette($nom);
+        $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'],$nom));
+        $this->vue->message("Votre demande a bien été envoyé.");
+    }
 
+    public function generate_file_name($bar_name, $doc): string {
+        return $_SESSION['login'] . '_request_'.$bar_name.'_'.$doc.'.'.pathinfo($_FILES[$doc]['name'],PATHINFO_EXTENSION);
+    }
 
+    public function display_form() {
+        $this->vue->form_inscription();
+    }
 
-        } else {
-            $this->vue->form_inscription();
+    public function create_request_message_to_inbox($request_id) {
+        $this->modele->new_message('admin',1,$request_id);
+    }
+
+    public function handle_request() {
+        if (isset($_GET['request_id'])) {
+            $request_id = $_GET['request_id'];
+            $request = $this->modele->get_request($request_id);
+            $this->vue->display_request($request['login_request_user'],$request['request_content'],$request_id);
+        }
+    }
+
+    public function accept_bar_creation() {
+        if (isset($_GET['request_id'])) {
+            $request_id = $_GET['request_id'];
+            $request = $this->modele->get_request($request_id);
+            $request_user = $request['login_request_user'];
+            $bar_name = $request['request_content'];
+
+            $this->modele->ajouterBar($bar_name,$request_user);
+            $this->modele->new_message($request_user,2,'1|'.$bar_name);
+            $this->modele->delete_request($request_id);
+            $this->modele->delete_msg($request_id);
+            header('Location: index.php?module=inbox&action=show_inbox');
+        }
+    }
+    //TODO:encapsuler la répèt de code
+
+    public function decline_bar_creation() {
+        if (isset($_GET['request_id'])) {
+            $request_id = $_GET['request_id'];
+            $request = $this->modele->get_request($request_id);
+            $request_user = $request['login_request_user'];
+            $bar_name = $request['request_content'];
+
+            $this->modele->new_message($request_user,2,'0|'.$bar_name);
+            $this->modele->delete_request($request_id);
+            $this->modele->delete_msg($request_id);
+            header('Location: index.php?module=inbox&action=show_inbox');
         }
     }
 
