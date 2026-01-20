@@ -1,9 +1,9 @@
 <?php
 
     session_start();
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
 
     define('APP_SECURE', true);
     define('ROOT_PATH','/var/www/html/share/SAE_WEB_WAEL_ADAM_LINO_MARIUS/freshbreak/');

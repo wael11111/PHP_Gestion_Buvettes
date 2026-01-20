@@ -12,7 +12,7 @@ class Vue_produit extends Vue_generique {
         echo '
     <h2>Ajout produit</h2>
     <form method="post" action="index.php?module=produit">
-
+        <input type="hidden" name="csrf_token" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
         <label>Nom produit :</label>
         <input type="text" name="nom_produit" required><br>
 
