@@ -4,7 +4,6 @@ require_once('vue_gestion_profils.php');
 require_once('modele_gestion_profils.php');
 
 class ContGestionProfils {
-
     private $modele;
     private $vue;
 
@@ -22,8 +21,6 @@ class ContGestionProfils {
     }
 
     public function ajouterMembre() {
-
-
         if (
             empty($_POST['csrf_token']) ||
             empty($_SESSION['csrf_token']) ||
