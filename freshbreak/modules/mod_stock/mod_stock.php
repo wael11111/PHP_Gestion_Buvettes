@@ -12,7 +12,7 @@ class ModStock {
 
     public function exec() {
         $barId = $_SESSION['bar_id'] ?? null;
-        $this->controleur->afficher($barId);
+        $this->controleur->gestion_stock($barId);
         $this->content = $this->controleur->getContent();
     }
 

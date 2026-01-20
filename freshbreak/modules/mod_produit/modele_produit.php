@@ -36,6 +36,25 @@ class Modele_produit extends connexion {
         return $req->fetchAll();
     }
 
+    public function getProduitsComplets() {
+        $req = self::$bdd->query("
+        SELECT id_produit, nom_produit, prix_achat
+        FROM produit
+        ORDER BY nom_produit
+    ");
+        return $req->fetchAll();
+    }
+
+    public function getProduitById($id) {
+        $req = self::$bdd->prepare("
+        SELECT *
+        FROM produit
+        WHERE id_produit = :id
+    ");
+        $req->execute([':id' => $id]);
+        return $req->fetch();
+    }
+
     public function getFournisseurs() {
         $req = self::$bdd->query("
             SELECT id_fournisseur, nom
