@@ -8,10 +8,10 @@ class ModeleStock extends connexion {
         $req = self::$bdd->prepare("
         SELECT 
             p.nom_produit,
-            s.quantite
-        FROM stock s
-        JOIN produit p ON p.id_produit = s.id_produit
-        WHERE s.bar_associe = :bar
+            d.quantite
+        FROM disponibilite d
+        JOIN produit p ON p.id_produit = d.id_produit
+        WHERE d.bar_associe = :bar
         ORDER BY p.nom_produit
     ");
         $req->execute([

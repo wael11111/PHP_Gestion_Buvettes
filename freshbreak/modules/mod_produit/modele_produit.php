@@ -75,7 +75,7 @@ class Modele_produit extends connexion {
 
     public function ajouterStock($barId, $produitId, $quantite) {
         $req = self::$bdd->prepare("
-        INSERT INTO stock (bar_associe, id_produit, quantite)
+        INSERT INTO disponibilite (bar_associe, id_produit, quantite)
         VALUES (:b, :p, :q)
     ");
         $req->execute([
