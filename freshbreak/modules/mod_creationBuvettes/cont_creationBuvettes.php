@@ -89,9 +89,9 @@ class ContCreationBuvettes {
     public function finish_tasks($request_id,$request_user,$bar_name) {
         $this->modele->delete_request($request_id);
         $this->modele->delete_msg($request_id);
-        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc1.pdf");
-        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc2.pdf");
-        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc3.pdf");
+//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc1.pdf');
+//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc2.pdf');
+//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc3.pdf');
         header('Location: index.php?module=inbox&action=show_inbox');
     }
 
