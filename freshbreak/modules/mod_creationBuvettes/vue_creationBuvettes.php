@@ -17,9 +17,9 @@ class VueCreationBuvettes extends Vue_generique {
             <label>Nom Buvette :</label>
             <input type="text" name="nom" required><br>
             <label>Documents justificatifs :</label><br>
-            <input type="file" name="doc1" required accept=".pdf"><br>
-            <input type="file" name="doc2" required accept=".pdf"><br>
-            <input type="file" name="doc3" required accept=".pdf"><br>
+            <input type="file" name="doc1" required accept="application/pdf,.pdf"><br>
+            <input type="file" name="doc2" required accept="application/pdf,.pdf"><br>
+            <input type="file" name="doc3" required accept="application/pdf,.pdf"><br>
             <button type="submit">S’inscrire</button>
         </form>';
     }

@@ -30,10 +30,6 @@ class ContCreationBuvettes {
             $this->vue->message("❌ Cette buvette existe déjà.");
             return;
         }
-        if (pathinfo($_FILES['doc1']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc2']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc3']['name'],PATHINFO_EXTENSION) != 'pdf') {
-            $this->vue->request_submit_failure_format();
-            return;
-        }
         if ($this->modele->check_request_exists($nom)) {
             $this->vue->request_submit_failure_duplicate();
             return;
@@ -42,12 +38,20 @@ class ContCreationBuvettes {
         $file_name2 = $this->generate_file_name($nom,'doc2');
         $file_name3 = $this->generate_file_name($nom,'doc3');
 
-//        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
-//        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
-//        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
+        if (!$this->check_files()) {
+    //        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
+    //        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
+    //        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
+            $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'], $nom));
+            $this->vue->send_notice();
+        }
+        else {
+            $this->vue->request_submit_failure_format();
+        }
+    }
 
-        $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'],$nom));
-        $this->vue->send_notice();
+    public function check_files(): bool {
+        return mime_content_type($_FILES['doc1']['tmp_name']) == "application/pdf" && mime_content_type($_FILES['doc2']['tmp_name']) == "application/pdf" && mime_content_type($_FILES['doc3']['tmp_name']) == "application/pdf";
     }
 
     public function generate_file_name($bar_name, $doc): string {
