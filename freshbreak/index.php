@@ -6,6 +6,7 @@ if (empty($_SESSION['csrf_token'])) {
 }
 
     define('APP_SECURE', true);
+    define('ROOT_PATH','/var/www/html/share/SAE_WEB_WAEL_ADAM_LINO_MARIUS/freshbreak/');
     require_once('connexion.php');
     require_once('composants/connexion_info/comp_connexion_info.php');
     require_once('composants/menu_nav/comp_menu_nav.php');
@@ -52,6 +53,12 @@ if (empty($_SESSION['csrf_token'])) {
         case 'gestion_profils':
             require_once('modules/mod_gestion_profils/mod_gestion_profils.php');
             $mod = new ModGestionProfils();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
+        case 'inbox':
+            require_once('modules/mod_inbox/mod_inbox.php');
+            $mod = new Mod_inbox();
             $mod->exec();
             $template_content = $mod->print_content();
             break;
