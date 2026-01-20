@@ -10,7 +10,7 @@ class VueBuvettes extends Vue_generique {
     public function choice(){
        echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
 |
-<a href="index.php?module=creationBuvettes&action=ajout">Créer buvette</a>';
+<a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
     }
     public function afficher_buvette(array $tab) {
 
@@ -20,6 +20,8 @@ class VueBuvettes extends Vue_generique {
         }
 
         echo '<form method="get" action="index.php">';
+        echo '<input type="hidden" name="csrf_token"
+                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
         echo '<input type="hidden" name="module" value="buvettes">';
         echo '<input type="hidden" name="action" value="liste">';
 
