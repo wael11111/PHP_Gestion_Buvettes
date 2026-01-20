@@ -22,14 +22,12 @@ class Vue_inbox extends Vue_generique {
             $explanation = 'Les fichiers fournis ne sont pas conforme à la réglementation. Refaites votre demande en les corrigeant ou adressez vous à notre support s\'il s\'agit d\'une erreur.';
         }
 
-        echo "<div>
-                <p>La demande de création pour votre buvette  a été $decision. $explanation</p>
+        echo "<p>La demande de création pour votre buvette  a été $decision. $explanation</p>
             </div>";
     }
 
     public function show_admin_bar_creation_request($request_id) {
-        echo '<div>
-                <p>Vous avez une requête de création de bar à <a href="index.php?module=creationBuvettes&action=request_handling&request_id='.$request_id.'">traiter</a>.</p>
+        echo '<p>Vous avez une requête de création de bar à <a href="index.php?module=creationBuvettes&action=request_handling&request_id='.$request_id.'">traiter</a>.</p>
             </div>';
     }
 
@@ -37,6 +35,25 @@ class Vue_inbox extends Vue_generique {
         echo "<div>
                 <p>En dev</p>
             </div>";
+    }
+
+    public function no_msg_to_supp() {
+        echo '<p>Vous n\'avez aucune notification à supprimer.</p>
+                <a href="index.php?module=inbox">Retour</a>';
+    }
+
+    public function notification_type() {
+        echo '<div>
+                  <label>Notification</label>';
+    }
+
+    public function task_type() {
+        echo '<div>
+                  <label>Tâche</label>';
+    }
+
+    public function display_supp() {
+        echo '<a href="index.php?module=inbox&action=delete_all_notif">Supprimer toutes les notifications</a>';
     }
 }
 ?>

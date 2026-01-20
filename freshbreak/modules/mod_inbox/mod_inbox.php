@@ -17,6 +17,9 @@ class Mod_inbox {
             case 'show_inbox':
                 $this->controller->show_inbox();
                 break;
+            case 'delete_all_notif':
+                $this->controller->delete_all_notification();
+                break;
 
             default:
                 echo "<p>Action inconnue.</p>";

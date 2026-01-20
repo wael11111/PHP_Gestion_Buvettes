@@ -51,4 +51,10 @@ class ModeleCreationBuvettes extends connexion {
         $req = self::$bdd->prepare("DELETE FROM inbox WHERE message_type = 1 AND msg_arguments = :msg_arguments");
         $req->execute(['msg_arguments' => $request_id]);
     }
+
+    public function check_request_exists($nom) {
+        $req = self::$bdd->prepare("SELECT COUNT(*) FROM request_tasks WHERE request_content = :nom;");
+        $req->execute(['nom' => $nom]);
+        return $req->fetchColumn() > 0;
+    }
 }

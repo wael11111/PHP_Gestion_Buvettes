@@ -22,10 +22,13 @@ class ContCreationBuvettes {
             return;
         }
         if (pathinfo($_FILES['doc1']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc2']['name'],PATHINFO_EXTENSION) != 'pdf' || pathinfo($_FILES['doc3']['name'],PATHINFO_EXTENSION) != 'pdf') {
-            $this->vue->request_submit_failure();
+            $this->vue->request_submit_failure_format();
             return;
         }
-        //TODO:ajouter une vérif pour éviter de pouvoir spamer les demandes pour la création d'un même bar
+        if ($this->modele->check_request_exists($nom)) {
+            $this->vue->request_submit_failure_duplicate();
+            return;
+        }
         $file_name1 = $this->generate_file_name($nom,'doc1');
         $file_name2 = $this->generate_file_name($nom,'doc2');
         $file_name3 = $this->generate_file_name($nom,'doc3');
@@ -34,9 +37,9 @@ class ContCreationBuvettes {
 //        var_dump($_FILES['doc2']['error']);
 //        var_dump($_FILES['doc3']['error']);
 
-//        var_dump(move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1));
-//        var_dump(move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2));
-//        var_dump(move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3));
+        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
+        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
+        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
 
         $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'],$nom));
         $this->vue->message("Votre demande a bien été envoyé.");
@@ -71,12 +74,9 @@ class ContCreationBuvettes {
 
             $this->modele->ajouterBar($bar_name,$request_user);
             $this->modele->new_message($request_user,2,'1|'.$bar_name);
-            $this->modele->delete_request($request_id);
-            $this->modele->delete_msg($request_id);
-            header('Location: index.php?module=inbox&action=show_inbox');
+            $this->finish_tasks($request_id);
         }
     }
-    //TODO:encapsuler la répèt de code
 
     public function decline_bar_creation() {
         if (isset($_GET['request_id'])) {
@@ -86,10 +86,14 @@ class ContCreationBuvettes {
             $bar_name = $request['request_content'];
 
             $this->modele->new_message($request_user,2,'0|'.$bar_name);
-            $this->modele->delete_request($request_id);
-            $this->modele->delete_msg($request_id);
-            header('Location: index.php?module=inbox&action=show_inbox');
+            $this->finish_tasks($request_id);
         }
+    }
+
+    public function finish_tasks($request_id) {
+        $this->modele->delete_request($request_id);
+        $this->modele->delete_msg($request_id);
+        header('Location: index.php?module=inbox&action=show_inbox');
     }
 
     public function print_content() {

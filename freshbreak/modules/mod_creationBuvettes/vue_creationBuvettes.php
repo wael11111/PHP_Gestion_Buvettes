@@ -36,8 +36,13 @@ class VueCreationBuvettes extends Vue_generique {
                   <a href="index.php?module=creationBuvettes&action=decline_bar_creation&request_id='.$request_id.'">Refuser</a>';
     }
 
-    public function request_submit_failure() {
+    public function request_submit_failure_format() {
         echo '<p>Un ou plusieurs fichier enregistré ne sont pas du bon format. Il est nécessaire que les fichiers soient de format pdf.</p>
               <a href="index.php?module=creationBuvettes&action=show_form">Réessayer</a>';
+    }
+
+    public function request_submit_failure_duplicate() {
+        echo '<p>Vous avez déjà fait une demande de création pour ce bar. Vous ne pouvez pas effectuer plusieurs demandes à la fois pour la création d\'un bar donné</p>
+              <a href="index.php?module=creationBuvettes&action=show_form">Retour</a>';
     }
 }

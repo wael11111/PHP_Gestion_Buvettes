@@ -14,13 +14,31 @@ class Cont_inbox {
 
     public function show_inbox() {
         $tab_messages = $this->modele->getMessages($_SESSION['login']);
-        $this->vue->show_number_msg(count($tab_messages));
+        $nb_msg = count($tab_messages);
+        $this->vue->show_number_msg($nb_msg);
 
-        foreach ($tab_messages as $message) {
-            $this->show_message($message);
+        if ($nb_msg > 0) {
+            for ($i = $nb_msg - 1; $i >= 0; $i--) {
+                $this->show_message($tab_messages[$i]);
+            }
         }
+        $this->vue->display_supp();
     }
-    //TODO:ptet le cleaning des msgs
+
+    public function delete_all_notification() {
+        $login = $_SESSION['login'];
+        $nb_msg_delete = 0;
+        foreach ($this->modele->getMessages($login) as $message) {
+            if ($message['message_type'] == 2)
+                $nb_msg_delete += 1;
+        }
+        if ($nb_msg_delete > 0) {
+            $this->modele->delete_user_msgs($login);
+            header('Location: index.php?module=inbox');
+        }
+        else
+            $this->vue->no_msg_to_supp();
+    }
 
     public function show_message($message) {
         $message_type = $message['message_type'];
@@ -28,12 +46,15 @@ class Cont_inbox {
 
         switch ($message_type) {
             case 0:
+                $this->vue->task_type();
                 $this->vue->show_payment_confirmation($message_content);
                 break;
             case 1:
+                $this->vue->task_type();
                 $this->vue->show_admin_bar_creation_request($message_content);
                 break;
             case 2:
+                $this->vue->notification_type();
                 $this->vue->show_bar_creation_msg($message_content);
                 break;
         }

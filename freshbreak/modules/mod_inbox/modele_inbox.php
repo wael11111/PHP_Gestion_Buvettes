@@ -9,5 +9,10 @@ class Modele_inbox extends connexion {
         $req->execute();
         return $req->fetchAll();
     }
+
+    public function delete_user_msgs($login) {
+        $req = self::$bdd->prepare("DELETE FROM inbox WHERE user_login = :user_login AND (message_type = 2);");
+        $req->execute(['user_login' => $login]);
+    }
 }
 ?>
