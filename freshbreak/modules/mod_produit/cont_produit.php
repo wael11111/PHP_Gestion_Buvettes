@@ -19,6 +19,7 @@ class Cont_produit {
             $nom = trim($_POST['nom_produit']);
             $prixAchat = $_POST['prix_achat'];
             $prixVente = $_POST['prix_vente'];
+            $quantite = (int)($_POST['quantite'] ?? 0);
 
             $fournisseurId = $_POST['fournisseur_id'] ?? null;
             $fNom   = trim($_POST['fournisseur_nom'] ?? '');
@@ -35,12 +36,15 @@ class Cont_produit {
                 return;
             }
 
+            if ($quantite < 0) {
+                $this->vue->message("Quantité invalide.");
+                return;
+            }
+
             if ($this->modele->produitExiste($nom)) {
                 $this->vue->message("Ce produit existe déjà.");
                 return;
             }
-
-            $idFournisseurFinal = null;
 
             if (!empty($fournisseurId)) {
                 $idFournisseurFinal = $fournisseurId;
@@ -59,11 +63,24 @@ class Cont_produit {
                 }
             }
 
-            $this->modele->ajouterProduit(
+            $idProduit = $this->modele->ajouterProduit(
                 $nom,
                 $prixAchat,
                 $prixVente,
                 $idFournisseurFinal
+            );
+
+            $idBar = $_SESSION['bar_id'] ?? null;
+
+            if ($idBar === null) {
+                $this->vue->message("Aucune buvette sélectionnée.");
+                return;
+            }
+
+            $this->modele->ajouterStock(
+                $idBar,
+                $idProduit,
+                $quantite
             );
 
             $this->vue->message("Produit ajouté.");

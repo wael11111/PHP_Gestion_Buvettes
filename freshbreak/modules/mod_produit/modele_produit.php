@@ -15,15 +15,17 @@ class Modele_produit extends connexion {
 
     public function ajouterProduit($nom, $prixAchat, $prixVente, $idFournisseur) {
         $req = self::$bdd->prepare("
-            INSERT INTO produit (nom_produit, prix_achat, prix_vente, fournisseur)
-            VALUES (:nom, :pa, :pv, :f)
-        ");
+        INSERT INTO produit (nom_produit, prix_achat, prix_vente, fournisseur)
+        VALUES (:nom, :pa, :pv, :f)
+    ");
         $req->execute([
             ':nom' => $nom,
             ':pa' => $prixAchat,
             ':pv' => $prixVente,
             ':f'  => $idFournisseur
         ]);
+
+        return self::$bdd->lastInsertId();
     }
 
     public function getProduits() {
@@ -70,4 +72,17 @@ class Modele_produit extends connexion {
 
         return self::$bdd->lastInsertId();
     }
+
+    public function ajouterStock($barId, $produitId, $quantite) {
+        $req = self::$bdd->prepare("
+        INSERT INTO stock (bar_associe, id_produit, quantite)
+        VALUES (:b, :p, :q)
+    ");
+        $req->execute([
+            ':b' => $barId,
+            ':p' => $produitId,
+            ':q' => $quantite
+        ]);
+    }
+
 }

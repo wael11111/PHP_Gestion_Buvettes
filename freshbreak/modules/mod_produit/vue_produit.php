@@ -21,6 +21,9 @@ class Vue_produit extends Vue_generique {
 
         <label>Prix vente :</label>
         <input type="number" step="0.01" name="prix_vente" required><br>
+        
+        <label>Quantité initiale en stock :</label>
+        <input type="number" name="quantite" min="0" value="0" required><br><br>
 
         <label>Fournisseur existant :</label>
         <select name="fournisseur_id">

@@ -17,7 +17,7 @@ class VueStock extends Vue_generique {
             echo "<ul>";
             foreach ($stocks as $s) {
                 echo "<li>"
-                        . htmlspecialchars($s['produit'])
+                        . htmlspecialchars($s['nom_produit'])
                         . " : "
                         . (int)$s['quantite']
                         . "</li>";
