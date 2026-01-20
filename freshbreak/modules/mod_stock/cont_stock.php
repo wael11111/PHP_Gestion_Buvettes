@@ -2,7 +2,7 @@
 if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('vue_stock.php');
 require_once('modele_stock.php');
-require_once('../mod_produit/modele_produit.php');
+require_once('./modules/mod_produit/modele_produit.php');
 
 class ContStock {
 

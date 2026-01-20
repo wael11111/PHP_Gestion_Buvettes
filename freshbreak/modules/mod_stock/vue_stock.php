@@ -63,4 +63,7 @@ class VueStock extends Vue_generique {
         echo 'Ajouter un produit</a></p>';
     }
 
+    public function message($texte) {
+        echo "<p>$texte</p>";
+    }
 }
