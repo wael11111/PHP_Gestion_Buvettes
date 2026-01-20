@@ -11,6 +11,8 @@ class VueCreationBuvettes extends Vue_generique {
         echo '
         <h2>Ajout Buvette</h2>
         <form method="post" action="index.php?module=creationBuvettes">
+         <input type="hidden" name="csrf_token"
+                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
             <label>Nom Buvette :</label>
             <input type="text" name="nom" required><br>
             <button type="submit">S’inscrire</button>

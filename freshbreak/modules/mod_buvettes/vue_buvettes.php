@@ -20,6 +20,8 @@ class VueBuvettes extends Vue_generique {
         }
 
         echo '<form method="get" action="index.php">';
+        echo '<input type="hidden" name="csrf_token"
+                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
         echo '<input type="hidden" name="module" value="buvettes">';
         echo '<input type="hidden" name="action" value="liste">';
 

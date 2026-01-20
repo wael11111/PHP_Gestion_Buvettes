@@ -1,16 +1,19 @@
 <?php
-    // DÉMARRER LA SESSION EN PREMIER — absolument tout en haut
+
     session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
     define('APP_SECURE', true);
     require_once('connexion.php');
     require_once('composants/connexion_info/comp_connexion_info.php');
     require_once('composants/menu_nav/comp_menu_nav.php');
 
-    // Initialisation de la connexion à la BDD
+
     connexion::initConnexion();
 
-    // Détermination du module
+
     $module = isset($_GET['module']) ? $_GET['module'] : 'connexion';
 
     switch ($module) {
