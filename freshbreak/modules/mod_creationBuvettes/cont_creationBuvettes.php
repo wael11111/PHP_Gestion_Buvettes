@@ -33,13 +33,9 @@ class ContCreationBuvettes {
         $file_name2 = $this->generate_file_name($nom,'doc2');
         $file_name3 = $this->generate_file_name($nom,'doc3');
 
-//        var_dump($_FILES['doc1']['error']);
-//        var_dump($_FILES['doc2']['error']);
-//        var_dump($_FILES['doc3']['error']);
-
-        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
-        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
-        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
+//        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
+//        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
+//        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
 
         $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'],$nom));
         $this->vue->message("Votre demande a bien été envoyé.");
@@ -86,13 +82,16 @@ class ContCreationBuvettes {
             $bar_name = $request['request_content'];
 
             $this->modele->new_message($request_user,2,'0|'.$bar_name);
-            $this->finish_tasks($request_id);
+            $this->finish_tasks($request_id,$request_user,$bar_name);
         }
     }
 
-    public function finish_tasks($request_id) {
+    public function finish_tasks($request_id,$request_user,$bar_name) {
         $this->modele->delete_request($request_id);
         $this->modele->delete_msg($request_id);
+        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc1.pdf");
+        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc2.pdf");
+        unlink("./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc3.pdf");
         header('Location: index.php?module=inbox&action=show_inbox');
     }
 
