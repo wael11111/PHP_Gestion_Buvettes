@@ -13,13 +13,6 @@ class ContCreationBuvettes {
     }
 
     public function create_request() {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->vue->form_inscription();
-            return;
-        }
-
-
         if (
             empty($_POST['csrf_token']) ||
             empty($_SESSION['csrf_token']) ||
@@ -86,7 +79,7 @@ class ContCreationBuvettes {
 
             $this->modele->ajouterBar($bar_name,$request_user);
             $this->modele->new_message($request_user,2,'1|'.$bar_name);
-            $this->finish_tasks($request_id);
+            $this->finish_tasks($request_id,$request_user,$bar_name);
         }
     }
 

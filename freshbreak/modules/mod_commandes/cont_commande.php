@@ -36,12 +36,6 @@ class ContCommande {
     }
 
     public function ajouterProduit() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->vue->form_inscription();
-            return;
-        }
-
-
         if (
             empty($_POST['csrf_token']) ||
             empty($_SESSION['csrf_token']) ||
@@ -79,12 +73,6 @@ class ContCommande {
     }
 
     public function retirerProduit() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->vue->form_inscription();
-            return;
-        }
-
-
         if (
             empty($_POST['csrf_token']) ||
             empty($_SESSION['csrf_token']) ||
