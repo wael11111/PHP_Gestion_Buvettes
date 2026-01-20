@@ -45,4 +45,9 @@ class VueCreationBuvettes extends Vue_generique {
         echo '<p>Vous avez déjà fait une demande de création pour ce bar. Vous ne pouvez pas effectuer plusieurs demandes à la fois pour la création d\'un bar donné</p>
               <a href="index.php?module=creationBuvettes&action=show_form">Retour</a>';
     }
+
+    public function send_notice() {
+        echo '<p>Votre demande a bien été envoyé.</p>
+                <a href="index.php?module=buvettes">Retour</a>';
+    }
 }

@@ -38,7 +38,7 @@ class ContCreationBuvettes {
 //        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
 
         $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'],$nom));
-        $this->vue->message("Votre demande a bien été envoyé.");
+        $this->vue->send_notice();
     }
 
     public function generate_file_name($bar_name, $doc): string {
