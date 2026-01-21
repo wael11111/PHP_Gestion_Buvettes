@@ -36,4 +36,11 @@ class ModeleBuvette extends connexion
         return $stmt->fetchColumn();
     }
 
+    public function getNomBarById(int $barId) {
+        $sql = 'SELECT nom FROM bar WHERE id_bar = :id';
+        $stmt = self::$bdd->prepare($sql);
+        $stmt->execute([':id' => $barId]);
+        return $stmt->fetchColumn();
+    }
+
 }

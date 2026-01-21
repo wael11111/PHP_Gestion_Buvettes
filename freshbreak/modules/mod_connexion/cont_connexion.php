@@ -26,7 +26,7 @@ class ContConnexion {
                 empty($_SESSION['csrf_token']) ||
                 !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
             ) {
-                $this->vue->message("Erreur de sécurité.");
+                //$this->vue->message("Erreur de sécurité.");
                 return;
             }
 
@@ -41,7 +41,8 @@ class ContConnexion {
                     $_SESSION['login'] = $login;
                     $_SESSION['solde'] = $this->modele->getSolde($login);
                     $_SESSION['admin'] = false;
-                    header('Location: index.php');
+                    unset($_SESSION['bar_id']);
+                    header('Location: index.php?module=buvettes&action=liste');
                     exit;
                 }
             }
@@ -63,7 +64,9 @@ class ContConnexion {
                     $_SESSION['admin'] = true;
                 else
                     $_SESSION['admin'] = false;
-                header('Location: index.php');
+                unset($_SESSION['bar_id']); // sécurité
+                header('Location: index.php?module=buvettes&action=liste');
+                exit;
             } else {
                 $this->vue->message(" Identifiant ou mot de passe incorrect.");
                 $this->vue->form_connexion();

@@ -30,8 +30,9 @@ class ContStock {
         }
 
         // Sinon : affichage normal du stock
+        $nomBar = $this->modeleStock->getNomBar($barId);
         $stocks = $this->modeleStock->getStockParBar($barId);
-        $this->vue->afficher($stocks);
+        $this->vue->afficher($stocks, $nomBar);
     }
 
     private function reapprovisionnement($barId) {

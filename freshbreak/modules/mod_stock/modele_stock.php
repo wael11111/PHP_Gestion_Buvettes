@@ -4,6 +4,16 @@ require_once('connexion.php');
 
 class ModeleStock extends connexion {
 
+    public function getNomBar($barId) {
+        $req = self::$bdd->prepare("
+        SELECT nom
+        FROM bar
+        WHERE id_bar = :id
+    ");
+        $req->execute([':id' => $barId]);
+        return $req->fetchColumn();
+    }
+
     public function getStockParBar($barId) {
         $req = self::$bdd->prepare("
             SELECT p.nom_produit, d.quantite

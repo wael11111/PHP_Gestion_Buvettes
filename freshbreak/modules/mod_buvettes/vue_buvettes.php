@@ -42,22 +42,55 @@ class VueBuvettes extends Vue_generique {
         echo '</form>';
     }
 
-    public function menu_client() {
+    private function headerBuvette($nomBar) {
+        echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
+    }
+
+    private function changerBuvette(array $buvettes) {
+        echo '<hr>';
+        echo '<h4>Changer de buvette</h4>';
+
+        echo '<form method="get" action="index.php">
+        <input type="hidden" name="module" value="buvettes">
+        <input type="hidden" name="action" value="liste">
+
+        <select name="bar_id" required>
+            <option value="">-- Sélectionner --</option>';
+
+        foreach ($buvettes as $b) {
+            echo '<option value="'.$b['id_bar'].'">'
+                . htmlspecialchars($b['nom']) .
+                '</option>';
+        }
+
+        echo '</select>
+        <button type="submit">Valider</button>
+    </form>';
+    }
+
+    public function menu_client($nomBar, $buvettes) {
+        echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
+
         echo '<ul>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
         </ul>';
     }
-    public function menu_gérant() {
+    public function menu_gérant($nomBar, $buvettes) {
+        $this->headerBuvette($nomBar);
+
         echo '<ul>
-            <li><a href="index.php?module=stock&action=reapprovisionnement">Réapprovisionnement</a></li>
             <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
-            <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
-            <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
-            <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
-            <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">ajout utilisateur</a></li>
+            <li><a href="index.php?module=stock">Gérer le stock</a></li>
+            <li><a href="index.php?module=buvettes&action=bilan">Bilan</a></li>
+            <li><a href="index.php?module=buvettes&action=payer">Payer</a></li>
+            <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">Ajouter un utilisateur</a></li>
         </ul>';
+
+        $this->changerBuvette($buvettes);
     }
-    public function menu_barman(){
+    public function menu_barman($nomBar, $buvettes) {
+        $this->headerBuvette($nomBar);
+
         echo '<ul>
             <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
             <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
@@ -90,5 +123,9 @@ class VueBuvettes extends Vue_generique {
             echo "<li>" . htmlspecialchars($b['nom']) . "</li>";
         }
         echo "</ul>";
+    }
+
+    public function message($texte) {
+        echo "<p>$texte</p>";
     }
 }

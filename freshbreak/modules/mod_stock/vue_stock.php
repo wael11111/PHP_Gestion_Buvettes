@@ -7,13 +7,14 @@ class VueStock extends Vue_generique {
     public function __construct() {
         parent::__construct();
     }
-
-    public function afficher($stocks) {
+    public function afficher($stocks, $nomBar) {
         echo "<h2>Stocks</h2>";
 
         if (empty($stocks)) {
             echo "<p>Aucun stock disponible.</p>";
         } else {
+            echo "<h2>Stock de la buvette " . htmlspecialchars($nomBar) . "</h2>";
+            echo '<a href="index.php?module=stock&action=reapprovisionnement" style="display:inline-block; margin-bottom:15px;">Réapprovisionner le stock</a>';
             echo "<ul>";
             foreach ($stocks as $s) {
                 echo "<li>"
