@@ -18,6 +18,13 @@ if (empty($_SESSION['csrf_token'])) {
     $module = isset($_GET['module']) ? $_GET['module'] : 'connexion';
 
     switch ($module) {
+
+        case 'rejoindreBuvette':
+            require_once('modules/mod_adhesion/mod_adhesion.php');
+            $mod = new ModAdhesion();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
         case 'creationBuvettes':
             require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
             $mod = new ModCreationBuvettes();

@@ -22,7 +22,8 @@ class ContBuvettes {
         }
 
     public function liste($login){
-        $this-> vue -> afficher_buvette($this->modele-> getListe($login));
+        $this-> vue -> afficher_buvette($this->modele-> getJoinedListe($login));
+        $this-> vue -> afficher_buvetteNon($this->modele-> getNonJoinedListe($login));
     }
     public function afficherStock(){}
 
@@ -35,9 +36,16 @@ class ContBuvettes {
         $this->vue->choice();
     }
 
+    public function rejoins($login,$bar){
+        return $this->modele->barRejoins($login,$bar);
+
+    }
+
     public function print_content() {
         return $this->vue->close_buffer();
     }
+
+
 
     public function retour(){}
 

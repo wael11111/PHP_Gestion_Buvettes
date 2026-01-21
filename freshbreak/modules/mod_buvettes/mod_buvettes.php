@@ -19,6 +19,7 @@ class ModBuvettes {
         // mémorisation du bar sélectionné
         if (isset($_GET['bar_id'])) {
             $_SESSION['bar_id'] = intval($_GET['bar_id']);
+
         }
 
         switch ($action) {

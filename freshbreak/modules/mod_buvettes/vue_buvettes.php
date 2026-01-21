@@ -12,36 +12,63 @@ class VueBuvettes extends Vue_generique {
 |
 <a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
     }
-    public function afficher_buvette(array $tab) {
-
+    public function afficher_buvette(array $tab)
+    {
         if (empty($tab)) {
-            echo '<p>Aucune buvette disponible.</p>';
+
             return;
         }
 
-        echo '<form method="get" action="index.php">';
-        echo '<input type="hidden" name="csrf_token"
-                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
-        echo '<input type="hidden" name="module" value="buvettes">';
-        echo '<input type="hidden" name="action" value="liste">';
 
+        echo '<h2> Bar rejoins </h2>';
+        echo '<div class="liste-buvettes">';
 
-        echo '<label for="bar_id">Choisir une buvette :</label><br>';
-
-        echo '<select name="bar_id" id="bar_id" required>';
-        echo '<option value="">-- Sélectionner --</option>';
         foreach ($tab as $item) {
-            echo '<option value="' . htmlspecialchars($item['id_bar']) . '">';
-            echo htmlspecialchars($item['nom']);
-            echo '</option>';
+
+            echo '<div class="buvette-card">';
+
+            echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
+
+            echo '<a href="index.php?module=buvettes&bar_id='
+                . (int)$item['id_bar']
+                . '">
+                Accéder à la buvette
+              </a>';
+
+            echo '</div>';
         }
 
-        echo '</select> ';
-
-        echo '<button type="submit">Valider</button>';
-        echo '</form>';
+        echo '</div>';
     }
 
+    public function afficher_buvetteNon(array $tab)
+    {
+        if (empty($tab)) {
+
+            return;
+        }
+
+
+        echo '<h2> Autre Bar </h2>';
+        echo '<div class="liste-buvettes">';
+
+        foreach ($tab as $item) {
+
+            echo '<div class="buvette-card">';
+
+            echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
+
+            echo '<a href="index.php?module=rejoindreBuvette&bar_id='
+                . (int)$item['id_bar']
+                . '">
+                Rejoindre la buvette
+              </a>';
+
+            echo '</div>';
+        }
+
+        echo '</div>';
+    }
     public function menu_client() {
         echo '<ul>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
@@ -91,4 +118,24 @@ class VueBuvettes extends Vue_generique {
         }
         echo "</ul>";
     }
+
+    public function form_inscription() {
+        echo '
+        <h2>Ajout Buvette</h2>
+        <form method="post" action="index.php?module=creationBuvettes&action=create_request" enctype="multipart/form-data">
+        <form method="post" action="index.php?module=creationBuvettes">
+         <input type="hidden" name="csrf_token"
+                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
+            <label>Nom Buvette :</label>
+            <input type="text" name="nom" required><br>
+            <label>Documents justificatifs :</label><br>
+            <input type="file" name="doc1" required accept=".pdf"><br>
+            <input type="file" name="doc2" required accept=".pdf"><br>
+            <input type="file" name="doc3" required accept=".pdf"><br>
+            <button type="submit">S’inscrire</button>
+        </form>';
+    }
+
+
+
 }
