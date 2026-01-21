@@ -13,33 +13,41 @@ class ContConnexion {
     }
 
     public function form_inscription() {
-        if (
-            empty($_POST['csrf_token']) ||
-            empty($_SESSION['csrf_token']) ||
-            !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
-        ) {
-
-            return;
-        }
 
         if (isset($_SESSION['login'])) {
             $this->vue->deja_connecte($_SESSION['login']);
-        } elseif (!empty($_POST['login']) && !empty($_POST['mdp'])) {
-            $login = $_POST['login'];
-            $mdp = $_POST['mdp'];
-
-            if ($this->modele->loginExiste($login)) {
-                $this->vue->message(" Ce login existe déjà.");
-            } else {
-                $this->modele->ajouterUtilisateur($login, $mdp);
-                $_SESSION['login'] = $login;
-                $_SESSION['solde'] = $this->modele->getSolde($login);
-                $_SESSION['admin'] = false;
-                header('Location: index.php');
-            }
-        } else {
-            $this->vue->form_inscription();
+            return;
         }
+
+        if (!empty($_POST)) {
+
+            if (
+                empty($_POST['csrf_token']) ||
+                empty($_SESSION['csrf_token']) ||
+                !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+            ) {
+                $this->vue->message("Erreur de sécurité.");
+                return;
+            }
+
+            if (!empty($_POST['login']) && !empty($_POST['mdp'])) {
+                $login = $_POST['login'];
+                $mdp = $_POST['mdp'];
+
+                if ($this->modele->loginExiste($login)) {
+                    $this->vue->message("Ce login existe déjà.");
+                } else {
+                    $this->modele->ajouterUtilisateur($login, $mdp);
+                    $_SESSION['login'] = $login;
+                    $_SESSION['solde'] = $this->modele->getSolde($login);
+                    $_SESSION['admin'] = false;
+                    header('Location: index.php');
+                    exit;
+                }
+            }
+        }
+
+        $this->vue->form_inscription();
     }
 
 
