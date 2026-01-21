@@ -55,6 +55,7 @@ class VueBuvettes extends Vue_generique {
             <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
             <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">ajout utilisateur</a></li>
+            <li><a href="index.php?module=inventaire_manuel&action=display_all_products">Faire un inventaire manuel</a></li>
         </ul>';
     }
     public function menu_barman(){

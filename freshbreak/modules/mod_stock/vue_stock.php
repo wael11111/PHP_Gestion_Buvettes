@@ -30,10 +30,11 @@ class VueStock extends Vue_generique {
 
         echo "<h2>Réapprovisionnement</h2>";
 
-        echo '<form method="post">';
-        echo '<label>Produit</label><br>';
-        echo '<select name="id_produit" required>';
-        echo '<option value="">-- choisir --</option>';
+        echo '<form method="post">
+                  <input type="hidden" name="csrf_token" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
+                  <label>Produit</label><br>
+                  <select name="id_produit" required>
+                  <option value="">-- choisir --</option>';
 
         foreach ($produits as $p) {
             echo '<option value="'.$p['id_produit'].'">';
@@ -41,13 +42,11 @@ class VueStock extends Vue_generique {
             echo '</option>';
         }
 
-        echo '</select><br><br>';
-
-        echo '<label>Quantité</label><br>';
-        echo '<input type="number" name="quantite" min="1" required><br><br>';
-
-        echo '<button type="submit">Réapprovisionner</button>';
-        echo '</form>';
+        echo '    </select><br><br>
+                  <label>Quantité</label><br>
+                  <input type="number" name="quantite" min="1" required><br><br>
+                  <button type="submit">Réapprovisionner</button>
+              </form>';
 
         if ($message) {
             echo '<p style="color:green;">'.$message;
@@ -57,10 +56,8 @@ class VueStock extends Vue_generique {
             echo '</p>';
         }
 
-        echo '<p style="font-size:0.9em">';
-        echo 'Produit introuvable ? ';
-        echo '<a href="index.php?module=produit&action=form_produit">';
-        echo 'Ajouter un produit</a></p>';
+        echo '<p style="font-size:0.9em">Produit introuvable ?
+                <a href="index.php?module=produit&action=form_produit">Ajouter un produit</a></p>';
     }
 
     public function message($texte) {
