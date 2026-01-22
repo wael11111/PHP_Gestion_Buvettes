@@ -30,5 +30,53 @@ class Vue_bilan extends Vue_Generique {
         <p>La date de début est supérieur à la date de fin. La date de fin doit être supérieur à la date de début :</p>';
         $this->show_form($date_min,$date_max);
     }
+
+    public function display_summary($summary,$date_debut,$date_fin) {
+        echo '
+        <h3>Bilan statistique du bar</h3>
+            <p>Voici le bilan de la période démarrant du ' . $this->format_date($date_debut) . ' au ' . $this->format_date($date_fin) . ' :</p>
+            <p>Chiffre d\'affaire : ' . $summary['chiffre_affaire'] . '€</p>
+            <p>Dépenses : ' . $summary['depense'] . ('€</p>
+            <p>Bénéfices : ' . strval($summary['chiffre_affaire'] - $summary['depense'])) .'€</p>
+        <div>';
+        $this->afficher_stock($summary['consommation']);
+        echo '
+        </div>
+        <div>
+            <h4>Quantité de produits réapprovisionnés</h4>';
+        foreach ($summary['reapprovisionnement'] as $produit) {
+            echo '<p>'.$produit['nom'].' : '.$produit['quantite'].'</p>';
+        }
+        echo '
+        </div>';
+
+    }
+
+    public function format_date($date) {
+        $decomposed_date = explode("-",$date);
+        return $decomposed_date[2]."/".$decomposed_date[1]."/".$decomposed_date[0];
+    }
+
+
+    public function afficher_stock(array $stock)
+    {
+        if (empty($stock)) {
+            echo '<p>Aucune consommation.</p>';
+            return;
+        }
+
+        echo '<h4>Consommation</h4>';
+
+        foreach ($stock as $produit) {
+            echo "<p>"
+                . htmlspecialchars($produit['nom'])
+                . " → "
+                . (int)$produit['vendu'][0][0]
+                . " consommé</p>";
+        }
+    }
+
+
+
 }
 ?>

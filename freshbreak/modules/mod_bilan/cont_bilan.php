@@ -35,9 +35,10 @@ class Cont_bilan {
                 [
                     'chiffre_affaire' => $this->modele->chiffre_affaire($date_debut,$date_fin,$_SESSION['bar_id']),
                     'depense' => $this->get_depense($date_debut,$date_fin),
-                    'consommation' =>
-                    'reapprovisionnement' =>
-                ]
+                    'consommation' => $this->getStock($date_debut,$date_fin),
+                    'reapprovisionnement' => $this->modele->get_reapprovisionnement(),
+                ];
+            $this->vue->display_summary($bilan,$date_debut,$date_fin);
         }
     }
 
@@ -50,12 +51,28 @@ class Cont_bilan {
         return $total;
     }
 
-    public function get_reapprovisionnement() {
-
-    }
-
     public function print_content() {
         return $this->vue->close_buffer();
+    }
+    public function getStock($date_debut,$date_fin): array {
+        $id_bar=$_SESSION['bar_id'];
+        $dispo= $this->modele->get_dispo($id_bar);
+        $stock = [];
+
+        foreach ($dispo as $id_produit) {
+            $stock[] = [
+                'id' => $id_produit,
+                'nom' => $this->modele->get_produit($id_produit['id_produit']),
+                'vendu' => $this->modele->get_diff_produit(
+                    $id_bar,
+                    $date_debut,
+                    $date_fin,
+                    $id_produit['id_produit']
+                )
+            ];
+        }
+        return $stock;
+
     }
 }
 ?>
