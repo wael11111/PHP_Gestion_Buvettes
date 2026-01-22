@@ -54,12 +54,14 @@ class VueBuvettes extends Vue_generique {
     }
 
     public function menu_client($nomBar, $buvettes) {
-        echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
+        $this->headerBuvette($nomBar);
 
         echo '<div class="menu-actions">';
         echo '<a href="index.php?module=buvettes&action=voir_produits" class="menu-btn">Voir les produits</a>';
         echo '<a href="index.php?module=buvettes&action=payer" class="menu-btn">Payer</a>';
         echo '</div>';
+
+        $this->changerBuvette($buvettes);
     }
 
     public function menu_gérant($nomBar, $buvettes) {
@@ -82,6 +84,8 @@ class VueBuvettes extends Vue_generique {
         echo '<a href="index.php?module=commande&action=client" class="menu-btn">Nouvelle commande</a>';
         echo '<a href="index.php?module=stock&action=getStocks" class="menu-btn">Stock</a>';
         echo '</div>';
+
+        $this->changerBuvette($buvettes);
     }
 
     public function menu_admin(){

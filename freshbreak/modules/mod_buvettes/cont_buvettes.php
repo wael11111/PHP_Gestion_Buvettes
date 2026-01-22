@@ -32,6 +32,11 @@ class ContBuvettes {
     }
 
     public function liste($login){
+
+        if (isset($_SESSION['bar_id'])) {
+            return;
+        }
+
         if (isset($_SESSION['admin']) && $_SESSION['admin']) {
             $buvettes = $this->modele->getAllBars();
         } else {
