@@ -48,13 +48,11 @@ class VueStock extends Vue_generique {
             echo '</option>';
         }
 
-        echo '</select><br><br>';
-
-        echo '<label>Quantité</label><br>';
-        echo '<input type="number" name="quantite" min="1" required><br><br>';
-
-        echo '<button type="submit">Réapprovisionner</button>';
-        echo '</form>';
+        echo '    </select><br><br>
+                  <label>Quantité</label><br>
+                  <input type="number" name="quantite" min="1" required><br><br>
+                  <button type="submit">Réapprovisionner</button>
+              </form>';
 
         if ($message) {
             echo '<p style="color:green;">'.$message;
@@ -64,6 +62,8 @@ class VueStock extends Vue_generique {
             echo '</p>';
         }
 
+        echo '<p style="font-size:0.9em">Produit introuvable ?
+                <a href="index.php?module=produit&action=form_produit">Ajouter un produit</a></p>';
     }
 
     public function message($texte) {

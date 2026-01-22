@@ -20,12 +20,14 @@ class Vue_produit extends Vue_generique {
         <input type="number" step="0.01" name="prix_achat" required><br>
 
         <label>Prix vente :</label>
-        <input type="number" step="0.01" name="prix_vente" required><br>
+        <input type="number" step="0.01" name="prix_vente" required><br>';
         
-        <label>Quantité initiale en stock :</label>
-        <input type="number" name="quantite" min="0" value="0" required><br><br>
+        if (!isset($_SESSION['tmp_save_inventory'])) {
+            echo '<label>Quantité initiale en stock :</label>
+        <input type="number" name="quantite" min="0" value="0" required><br><br>';
+        }
 
-        <label>Fournisseur existant :</label>
+        echo '<label>Fournisseur existant :</label>
         <select name="fournisseur_id">
             <option value="">-- Aucun --</option>';
 
