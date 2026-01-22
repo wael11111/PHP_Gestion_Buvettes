@@ -8,7 +8,7 @@ class VueBuvettes extends Vue_generique {
     }
 
     public function choice(){
-       echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
+        echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
 |
 <a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
     }
@@ -44,6 +44,7 @@ class VueBuvettes extends Vue_generique {
 
     public function menu_client() {
         echo '<ul>
+            <li><a href="index.php?module=buvettes&action=voir_produits">Voir les produits</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
         </ul>';
     }
@@ -76,7 +77,6 @@ class VueBuvettes extends Vue_generique {
         </ul>';
     }
 
-
     public function afficher($buvettes) {
         echo "<h2>Liste des buvettes</h2>";
 
@@ -90,5 +90,24 @@ class VueBuvettes extends Vue_generique {
             echo "<li>" . htmlspecialchars($b['nom']) . "</li>";
         }
         echo "</ul>";
+    }
+
+    public function afficher_produits_disponibles($produits) {
+        echo '<h2>Produits disponibles</h2>';
+
+        if (empty($produits)) {
+            echo '<p>Aucun produit disponible actuellement.</p>';
+            return;
+        }
+
+        echo '<ul>';
+        foreach ($produits as $p) {
+            echo '<li>'
+                . htmlspecialchars($p['nom_produit'])
+                . ' - '
+                . htmlspecialchars($p['prix_vente'])
+                . ' €</li>';
+        }
+        echo '</ul>';
     }
 }

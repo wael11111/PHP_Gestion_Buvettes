@@ -41,8 +41,11 @@ class ModBuvettes {
 
             case 'payer':
                 $this->controleur->payer($_SESSION['bar_id'] ?? null);
-                break
-                ;
+                break;
+
+            case 'voir_produits':
+                $this->controleur->voir_produits();
+                break;
 
             case 'changer':
                 unset($_SESSION['bar_id']);
@@ -55,7 +58,6 @@ class ModBuvettes {
                 break;
         }
 
-        // menu affiché uniquement si un bar est sélectionné
         if (isset($_SESSION['bar_id'])) {
             $this->controleur->menu($_SESSION['login']);
         }

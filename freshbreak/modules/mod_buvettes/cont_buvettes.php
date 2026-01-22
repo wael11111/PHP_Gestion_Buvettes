@@ -38,6 +38,16 @@ class ContBuvettes {
         $this->vue->choice();
     }
 
+    public function voir_produits() {
+        if (!isset($_SESSION['bar_id'])) {
+            echo '<p>Veuillez d\'abord sélectionner une buvette.</p>';
+            return;
+        }
+
+        $produits = $this->modele->getProduitsDisponibles($_SESSION['bar_id']);
+        $this->vue->afficher_produits_disponibles($produits);
+    }
+
     public function print_content() {
         return $this->vue->close_buffer();
     }
