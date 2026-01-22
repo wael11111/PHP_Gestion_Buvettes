@@ -93,7 +93,7 @@ class VueBuvettes extends Vue_generique {
         $this->headerBuvette($nomBar);
 
         echo '<ul>
-            <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
+            <li><a href="index.php?module=commande&action=client">Nouvelle commande</a></li>
             <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
             
         </ul>';
