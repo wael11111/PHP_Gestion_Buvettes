@@ -68,11 +68,7 @@ class ContConnexion {
                 }
 
                 unset($_SESSION['bar_id']); // sécurité
-                if ($_SESSION['admin']) {
-                    header('Location: index.php?module=buvettes&action=toutes');
-                } else {
                     header('Location: index.php?module=buvettes&action=liste');
-                }
                 exit;
             } else {
                 $this->vue->message(" Identifiant ou mot de passe incorrect.");
