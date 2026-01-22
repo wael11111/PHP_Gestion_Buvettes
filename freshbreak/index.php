@@ -16,6 +16,8 @@
 
 
     $module = isset($_GET['module']) ? $_GET['module'] : 'connexion';
+    if (!isset($_SESSION['login']))
+        header("Location: index.php?module=connexion&action=connexion");
 
     switch ($module) {
         case 'creationBuvettes':
