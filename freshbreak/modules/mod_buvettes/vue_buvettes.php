@@ -9,7 +9,7 @@ class VueBuvettes extends Vue_generique {
 
     public function choice(){
        echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
-|
+            |
             <a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
     }
     public function afficher_buvette(array $tab) {
