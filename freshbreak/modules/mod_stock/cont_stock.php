@@ -37,6 +37,13 @@ class ContStock {
 
     private function reapprovisionnement($barId) {
 
+        $role = $this->modeleStock->getRoleParBar($_SESSION['login'], $_SESSION['bar_id']);
+
+        if ($role !== 'gérant' && !$_SESSION['admin']) {
+            echo "Accès interdit";
+            return;
+        }
+
         $produits = $this->modeleProduit->getProduitsComplets();
         $message = null;
         $prixTotal = null;

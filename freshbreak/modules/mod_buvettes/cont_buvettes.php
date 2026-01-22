@@ -12,7 +12,7 @@ class ContBuvettes {
     }
 
     public function menu($login, $barId) {
-        $role = $this->modele->getRole($login);
+        $role = $this->modele->getRoleParBar($login, $barId);
         $nomBar = $this->modele->getNomBarById($barId);
         $buvettes = $this->modele->getListe($login);
 

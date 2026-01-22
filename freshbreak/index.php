@@ -24,14 +24,12 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
-
         case 'connexion':
             require_once('modules/mod_connexion/mod_connexion.php');
             $mod = new ModConnexion();
             $mod->exec();
             $template_content = $mod->print_content();
             break;
-
         case 'solde_refill':
             require_once('modules/mod_solde_refill/mod_solde_refill.php');
             $mod = new ModSoldeRefill();
@@ -68,14 +66,12 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
-
         case 'commande':
             require_once('modules/mod_commandes/mod_commande.php');
             $mod = new ModCommande();
             $mod->exec();
             $template_content = $mod->print_content();
             break;
-
     }
 
     $connexion_info = new Comp_connexion_info();

@@ -26,6 +26,22 @@ class ModeleStock extends connexion {
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getRoleParBar($login_utilisateur, int $barId){
+        $sql = 'SELECT role_bar 
+        FROM role 
+        WHERE login_utilisateur = :login_utilisateur
+        AND bar_associe = :bar';
+
+        $stmt = self::$bdd->prepare($sql);
+        $stmt->execute([
+            ':login_utilisateur' => $login_utilisateur,
+            ':bar' => $barId
+        ]);
+
+
+        return $stmt->fetchColumn();
+    }
+
     public function ajouterOuIncrementerStock($barId, $produitId, $quantite) {
 
         $req = self::$bdd->prepare("
