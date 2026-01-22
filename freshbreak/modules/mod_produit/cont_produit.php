@@ -88,6 +88,11 @@ class Cont_produit {
                         $quantite
                     );
 
+                    if (isset($_SESSION['tmp_save_inventory'])) {
+                        $_SESSION['tmp_save_inventory'][$nom] = 0;
+                        header("Location: index.php?module=inventaire_manuel&action=display_all_products");
+                    }
+
                     $this->vue->message("Produit ajouté avec succès.");
                 }
             }
