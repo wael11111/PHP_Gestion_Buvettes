@@ -81,10 +81,8 @@ class VueBuvettes extends Vue_generique {
         $this->headerBuvette($nomBar);
 
         echo '<ul>
-            <li><a href="index.php?module=commande&action=selection_client">Nouvelle commande</a></li>
             <li><a href="index.php?module=stock">Gérer le stock</a></li>
             <li><a href="index.php?module=buvettes&action=bilan">Bilan</a></li>
-            <li><a href="index.php?module=buvettes&action=payer">Payer</a></li>
             <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">Ajouter un utilisateur</a></li>
         </ul>';
 
