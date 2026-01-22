@@ -46,8 +46,8 @@ class ModeleBuvette extends connexion
     public function getProduitsDisponibles($bar_id) {
         $sql = 'SELECT p.nom_produit, p.prix_vente
                 FROM produit p
-                JOIN stock s ON p.id_produit = s.id_produit
-                WHERE s.bar_associe = :bar_id AND s.quantite > 0
+                JOIN disponibilite d ON p.id_produit = d.id_produit
+                WHERE d.bar_associe = :bar_id AND d.quantite > 0
                 ORDER BY p.nom_produit';
 
         $stmt = self::$bdd->prepare($sql);
