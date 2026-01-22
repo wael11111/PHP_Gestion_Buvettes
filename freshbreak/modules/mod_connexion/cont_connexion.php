@@ -60,12 +60,19 @@ class ContConnexion {
             if ($this->modele->verifierConnexion($login, $mdp)) {
                 $_SESSION['login'] = $login;
                 $_SESSION['solde'] = $this->modele->getSolde($login);
-                if ($this->modele->getAdmin() == $login)
+
+                if ($this->modele->getAdmin() == $login) {
                     $_SESSION['admin'] = true;
-                else
+                } else {
                     $_SESSION['admin'] = false;
+                }
+
                 unset($_SESSION['bar_id']); // sécurité
-                header('Location: index.php?module=buvettes&action=liste');
+                if ($_SESSION['admin']) {
+                    header('Location: index.php?module=buvettes&action=toutes');
+                } else {
+                    header('Location: index.php?module=buvettes&action=liste');
+                }
                 exit;
             } else {
                 $this->vue->message(" Identifiant ou mot de passe incorrect.");
@@ -88,4 +95,3 @@ class ContConnexion {
     }
 }
 ?>
-
