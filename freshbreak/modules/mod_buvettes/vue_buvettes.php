@@ -105,7 +105,7 @@ class VueBuvettes extends Vue_generique {
 
         echo '<ul>
             <li><a href="index.php?module=stock">Gérer le stock</a></li>
-            <li><a href="index.php?module=buvettes&action=bilan">Bilan</a></li>
+            <li><a href="index.php?module=bilan&action=display_form">Bilan</a></li>
             <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">Ajouter un utilisateur</a></li>
             <li><a href="index.php?module=inventaire_manuel&action=display_all_products">Faire un inventaire manuel</a></li>
         </ul>';
