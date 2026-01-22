@@ -8,27 +8,10 @@ class VueBuvettes extends Vue_generique {
     }
 
     public function choice(){
-        echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
+       echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
 |
 <a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
     }
-
-    public function afficher_toutes_buvettes($bars) {
-        echo '<h2>Toutes les buvettes</h2>';
-
-        if (empty($bars)) {
-            echo '<p>Aucune buvette enregistrée.</p>';
-            return;
-        }
-
-        echo '<ul>';
-        foreach ($bars as $bar) {
-            echo '<li>' . htmlspecialchars($bar['nom']) . ' (ID: ' . $bar['id_bar'] . ')</li>';
-        }
-        echo '</ul>';
-        echo '<br><a href="index.php?module=buvettes">Retour</a>';
-    }
-
     public function afficher_buvette(array $tab) {
 
         if (empty($tab)) {
@@ -90,7 +73,6 @@ class VueBuvettes extends Vue_generique {
             <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
             <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
             <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">ajout utilisateur</a></li>
-            <li><a href="index.php?module=buvettes&action=toutes">Voir toutes les buvettes</a></li>
         </ul>';
     }
 

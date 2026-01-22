@@ -18,17 +18,13 @@ class ContBuvettes {
     }
 
     public function liste($login){
-        $this-> vue -> afficher_buvette($this->modele-> getListe($login));
-    }
-
-    public function afficher_toutes() {
-        if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
-            echo '<p>Accès refusé. Réservé aux administrateurs.</p>';
-            return;
+        if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+            $buvettes = $this->modele->getAllBars();
+        } else {
+            $buvettes = $this->modele->getListe($login);
         }
 
-        $bars = $this->modele->getAllBars();
-        $this->vue->afficher_toutes_buvettes($bars);
+        $this->vue->afficher_buvette($buvettes);
     }
 
     public function afficherStock(){}
