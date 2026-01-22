@@ -33,6 +33,10 @@ class VueStock extends Vue_generique {
 
         echo "<h2>Réapprovisionnement</h2>";
 
+//        echo '<p style="font-size:0.9em">';
+        echo '<a href="index.php?module=produit&action=form_produit">';
+        echo 'Ajouter un produit</a></p>';
+
         echo '<form method="post">';
         echo '<label>Produit</label><br>';
         echo '<select name="id_produit" required>';
@@ -60,10 +64,6 @@ class VueStock extends Vue_generique {
             echo '</p>';
         }
 
-        echo '<p style="font-size:0.9em">';
-        echo 'Produit introuvable ? ';
-        echo '<a href="index.php?module=produit&action=form_produit">';
-        echo 'Ajouter un produit</a></p>';
     }
 
     public function message($texte) {
