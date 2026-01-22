@@ -31,6 +31,10 @@ class ModBuvettes {
                 $this->controleur->liste($_SESSION['login']);
                 break;
 
+            case 'toutes':
+                $this->controleur->afficher_toutes();
+                break;
+
             case 'stock':
                 $this->controleur->afficherStock($_SESSION['bar_id'] ?? null);
                 break;
@@ -42,7 +46,7 @@ class ModBuvettes {
             case 'payer':
                 $this->controleur->payer($_SESSION['bar_id'] ?? null);
                 break
-             ;
+                ;
 
             case 'changer':
                 unset($_SESSION['bar_id']);

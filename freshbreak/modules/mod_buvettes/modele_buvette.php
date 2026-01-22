@@ -24,6 +24,13 @@ class ModeleBuvette extends connexion
 
         return $stmt->fetchAll();
     }
+
+    public function getAllBars() {
+        $sql = 'SELECT * FROM bar ORDER BY nom';
+        $stmt = self::$bdd->query($sql);
+        return $stmt->fetchAll();
+    }
+
     public function getRole($login_utilisateur){
         $sql = 'SELECT role_bar 
         FROM role 

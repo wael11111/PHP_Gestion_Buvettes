@@ -11,15 +11,26 @@ class ContBuvettes {
         $this->modele = new ModeleBuvette();
     }
 
-        public function menu($login) {
-            $role =$this->modele->getRole($login);
-            $method = 'menu_' . $role;
-            $this->vue->$method();
-        }
+    public function menu($login) {
+        $role =$this->modele->getRole($login);
+        $method = 'menu_' . $role;
+        $this->vue->$method();
+    }
 
     public function liste($login){
         $this-> vue -> afficher_buvette($this->modele-> getListe($login));
     }
+
+    public function afficher_toutes() {
+        if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+            echo '<p>Accès refusé. Réservé aux administrateurs.</p>';
+            return;
+        }
+
+        $bars = $this->modele->getAllBars();
+        $this->vue->afficher_toutes_buvettes($bars);
+    }
+
     public function afficherStock(){}
 
     public function afficherBilan(){}
