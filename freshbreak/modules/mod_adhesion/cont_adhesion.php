@@ -65,7 +65,7 @@ class ContAdhesion {
             $request = $this->modele->get_request($request_id);
             var_dump($request_id);
             var_dump($request);
-            $this->vue->display_request($request['login_request_user'],$request['request_content'],$request_id);
+            $this->vue->display_request($request['login_request_user'],$this->modele->get_bar_name($request['request_content']),$request_id);
         }
     }
 

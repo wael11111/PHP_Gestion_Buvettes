@@ -64,14 +64,14 @@ class Vue_inbox extends Vue_generique {
         $request_arguments = explode("|",$request_info);
         if ($request_arguments[0] == '1') {
             $decision = 'accepté';
-            $explanation = 'Vous pourrez retrouver votre bar'.$request_arguments[1].' dans le menu déroulant de sélection.';
+            $explanation = 'Vous pourrez retrouver le bar dans le menu déroulant de sélection.';
         }
         else {
             $decision = 'refusé';
             $explanation = 'Il semblerait que vous ne soyez pas adhérent de l\'association gérante du bar. Veuillez vous référer à son support si cela fait l\'objet d\'une erreur';
         }
 
-        echo "<p>La demande de création pour votre buvette  a été $decision. $explanation</p>
+        echo "<p>La demande d'adhésion au bar $request_arguments[1] a été $decision. $explanation</p>
             </div>";
     }
 }
