@@ -30,6 +30,10 @@ class Vue_inbox extends Vue_generique {
         echo '<p>Vous avez une requête de création de bar à <a href="index.php?module=creationBuvettes&action=request_handling&request_id='.$request_id.'">traiter</a>.</p>
             </div>';
     }
+    public function show_gerant_adhesion_request($request_id) {
+        echo '<p>Vous avez une requête d adhesion a <a href="index.php?module=rejoindreBuvette&action=request_handling&request_id='.$request_id.'">traiter</a>.</p>
+            </div>';
+    }
 
     public function show_payment_confirmation($request_info) {
         echo "<div>
@@ -54,6 +58,21 @@ class Vue_inbox extends Vue_generique {
 
     public function display_supp() {
         echo '<a href="index.php?module=inbox&action=delete_all_notif">Supprimer toutes les notifications</a>';
+    }
+
+    public function show_adhesion_answer($request_info) {
+        $request_arguments = explode("|",$request_info);
+        if ($request_arguments[0] == '1') {
+            $decision = 'accepté';
+            $explanation = 'Vous pourrez retrouver le bar dans le menu déroulant de sélection.';
+        }
+        else {
+            $decision = 'refusé';
+            $explanation = 'Il semblerait que vous ne soyez pas adhérent de l\'association gérante du bar. Veuillez vous référer à son support si cela fait l\'objet d\'une erreur';
+        }
+
+        echo "<p>La demande d'adhésion au bar $request_arguments[1] a été $decision. $explanation</p>
+            </div>";
     }
 }
 ?>

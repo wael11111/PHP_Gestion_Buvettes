@@ -6,7 +6,7 @@ class Mod_template {
     private $controller;
 
     public function __construct() {
-        $this->controller = new Cont_inventaire_manuel();
+        $this->controller = new Cont_template();
     }
 
     public function exec() {

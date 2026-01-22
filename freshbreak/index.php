@@ -20,6 +20,8 @@
         $module = 'connexion';
 
     switch ($module) {
+
+
         case 'creationBuvettes':
             require_once('modules/mod_creationBuvettes/mod_creationBuvettes.php');
             $mod = new ModCreationBuvettes();
@@ -72,6 +74,12 @@
         case 'produit':
             require_once('modules/mod_produit/mod_produit.php');
             $mod = new Modproduit();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
+        case 'rejoindreBuvette':
+            require_once('modules/mod_adhesion/mod_adhesion.php');
+            $mod = new ModAdhesion();
             $mod->exec();
             $template_content = $mod->print_content();
             break;

@@ -19,29 +19,52 @@ class VueBuvettes extends Vue_generique {
             return;
         }
 
-        echo '<a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
 
-        echo '<form method="get" action="index.php">';
-        echo '<input type="hidden" name="csrf_token"
-                   value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
-        echo '<input type="hidden" name="module" value="buvettes">';
-        echo '<input type="hidden" name="action" value="liste">';
+        echo '<h2> Bar rejoins </h2>';
+        echo '<div class="liste-buvettes">';
 
-
-        echo '<label for="bar_id">Choisir une buvette :</label><br>';
-
-        echo '<select name="bar_id" id="bar_id" required>';
-        echo '<option value="">-- Sélectionner --</option>';
         foreach ($tab as $item) {
-            echo '<option value="' . htmlspecialchars($item['id_bar']) . '">';
-            echo htmlspecialchars($item['nom']);
-            echo '</option>';
+
+            echo '<div class="buvette-card">';
+
+            echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
+
+            echo '<a href="index.php?module=buvettes&bar_id='
+                . (int)$item['id_bar']
+                . '">
+                Accéder à la buvette
+              </a>';
+
+            echo '</div>';
         }
 
-        echo '</select> ';
+        echo '</div>';
+    }
 
-        echo '<button type="submit">Valider</button>';
-        echo '</form>';
+    public function afficher_buvetteNon(array $tab) {
+        if (empty($tab)) {
+
+            return;
+        }
+        echo '<h2> Autre Bar </h2>';
+        echo '<div class="liste-buvettes">';
+
+        foreach ($tab as $item) {
+
+            echo '<div class="buvette-card">';
+
+            echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
+
+            echo '<a href="index.php?module=rejoindreBuvette&action=show_form&bar_id='
+                . (int)$item['id_bar']
+                . '">
+                Rejoindre la buvette
+              </a>';
+
+            echo '</div>';
+        }
+
+        echo '</div>';
     }
 
     private function headerBuvette($nomBar) {
