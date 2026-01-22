@@ -89,6 +89,13 @@
             $mod->exec();
             $template_content = $mod->print_content();
             break;
+
+        case 'bilan':
+            require_once ('modules/mod_bilan/mod_bilan.php');
+            $mod = new Mod_bilan();
+            $mod->exec();
+            $template_content = $mod->print_content();
+            break;
     }
 
     $connexion_info = new Comp_connexion_info();
