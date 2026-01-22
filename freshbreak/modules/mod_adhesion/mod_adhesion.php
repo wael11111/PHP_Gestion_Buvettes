@@ -11,6 +11,11 @@ class ModAdhesion {
 
     public function exec() {
         $action = isset($_GET['action']) ? $_GET['action'] : 'show_form';
+
+        if (isset($_GET['bar_id'])) {
+            $_SESSION['bar_id'] = intval($_GET['bar_id']);
+
+        }
         switch ($action) {
             case 'show_form':
                 $this->controller->display_form();
@@ -19,29 +24,27 @@ class ModAdhesion {
                 $this->controller->create_request();
                 break;
             case 'request_handling':
-                if ($_SESSION['admin'])
+
                     $this->controller->handle_request();
-                else
-                    echo "<h1>NUH HUH</h1>";
+
                 break;
             case 'accept_bar_creation':
-                if ($_SESSION['admin'])
+
                     $this->controller->accept_adhesion();
-                else
-                    echo "<h1>NUH HUH</h1>";
+
                 break;
             case 'decline_bar_creation':
-                if ($_SESSION['admin'])
-                    $this->controller->decline_bar_creation();
-                else
-                    echo "<h1>NUH HUH</h1>";
-                break;
 
-            default:
-                echo "<p>Action inconnue.</p>";
+                    $this->controller->decline_adhesion();
+
                 break;
+          //  default:
+            //    echo "<p>Action inconnue.</p>";
+              //  break;
         }
     }
+
+
 
     public function print_content() {
         return $this->controller->print_content();

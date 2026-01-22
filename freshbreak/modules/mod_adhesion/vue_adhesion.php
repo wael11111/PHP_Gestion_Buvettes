@@ -3,6 +3,9 @@ if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('./vue_generique.php');
 
 class VueAdhesion extends Vue_generique {
+    public function __construct() {
+        parent::__construct();
+    }
 
     public function confirmation($bar_id) {
 
@@ -11,7 +14,7 @@ class VueAdhesion extends Vue_generique {
         echo '<p>Souhaitez-vous envoyer une demande pour rejoindre cette buvette ?</p>';
 
         echo '
-        <form method="post" action="index.php?module=adhesion&action=envoyer">
+        <form method="post" action="index.php?module=rejoindreBuvette&action=create_request">
 
             <input type="hidden" name="csrf_token"
                    value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
@@ -21,18 +24,27 @@ class VueAdhesion extends Vue_generique {
 
             <button type="submit">Accepter</button>
             <a href="index.php?module=buvettes&action=liste">Annuler</a>
-
+ 
         </form>';
     }
 
     public function display_request($request_user,$bar_name,$request_id) {
-        echo '<h2>Requête de création de bar</h2>
+        echo '<h2>Requête d adhesion au  bar</h2>
                   <p>'.$request_user.' souhaite rejoindre le bar '.$bar_name.'.</p>
-                  <a href="index.php?module=creationBuvettes&action=accept_bar_creation&request_id='.$request_id.'">Accepter</a> 
-                  <a href="index.php?module=creationBuvettes&action=decline_bar_creation&request_id='.$request_id.'">Refuser</a>';
+                  <a href="index.php?module=rejoindreBuvette&action=accept_bar_creation&request_id='.$request_id.'">Accepter</a> 
+                  <a href="index.php?module=rejoindreBuvette&action=decline_bar_creation&request_id='.$request_id.'">Refuser</a>';
     }
 
+    public function send_notice() {
+        echo '<p>Votre demande a bien été envoyé.</p>
+                <a href="index.php?module=buvettes">Retour</a>';
+    }
     public function message($texte) {
         echo '<p>' . htmlspecialchars($texte) . '</p>';
+    }
+
+    public function request_submit_failure_duplicate() {
+        echo '<p>Vous avez déjà fait une demande de création pour ce bar. Vous ne pouvez pas effectuer plusieurs demandes à la fois pour la création d\'un bar donné</p>
+              <a href="index.php?module=creationBuvettes&action=show_form">Retour</a>';
     }
 }

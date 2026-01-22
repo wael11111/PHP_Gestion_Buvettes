@@ -20,15 +20,10 @@ class ModeleAdhesion extends connexion {
         $req->execute();
     }
 
-    public function newAdhesionRequest($login, $bar_id) {
-        $req = self::$bdd->prepare("
-        INSERT INTO request_tasks (login_request_user, bar_associe, request_type)
-        VALUES (:login, :bar_id, 'adhesion')
-    ");
-        $req->execute([
-            'login' => $login,
-            'bar_id' => $bar_id
-        ]);
+    public function new_request($bar,$login_request_user,$gestionnaire) {
+        $req_insert = self::$bdd->prepare("INSERT INTO request_tasks (login_tasked_user,login_request_user,request_content) VALUES
+                                                                                                  (:login_tasked_user,:login_request_user,:request_content);");
+        $req_insert->execute(['login_tasked_user' => $gestionnaire,'login_request_user' => $login_request_user,'request_content' => $bar]);
         return self::$bdd->lastInsertId();
     }
 
@@ -49,8 +44,10 @@ class ModeleAdhesion extends connexion {
         $req->execute(['id_request' => $request_id]);
     }
 
+
+
     public function delete_msg($request_id) {
-        $req = self::$bdd->prepare("DELETE FROM inbox WHERE message_type = 1 AND msg_arguments = :msg_arguments");
+        $req = self::$bdd->prepare("DELETE FROM inbox WHERE message_type = 3 AND msg_arguments = :msg_arguments");
         $req->execute(['msg_arguments' => $request_id]);
     }
 
@@ -61,10 +58,28 @@ class ModeleAdhesion extends connexion {
     }
 
     public function getGestionnaire($bar){
-        $req = self::$bdd->prepare("Select login_utilisateur from role where bar_associe = :bar ");
+        $req = self::$bdd->prepare("Select login_utilisateur from role where bar_associe = :bar and role_bar ='gérant' ");
         $req->execute(['bar' => $bar]);
         return $req->fetchColumn();
 
+    }
+
+    public function getLoginRequest($idrequest) {
+        $req =self::$bdd->prepare("Select login_request_user from request_tasks where id_request = :id_request;");
+        $req->execute(['id_request' => $idrequest]);
+        return $req->fetchColumn();
+    }
+
+    public function getBarRequest($idrequest) {
+        $req = self::$bdd->prepare("Select request_content from request_tasks where id_request = :id_request;");
+        $req->execute(['id_request' => $idrequest]);
+        return $req->fetchColumn();
+    }
+
+    public function get_bar_name($id_bar) {
+        $req = self::$bdd->prepare("SELECT nom FROM bar WHERE id_bar = :id_bar;");
+        $req->execute(['id_bar' => $id_bar]);
+        return $req->fetchColumn();
     }
 }
 ?>
