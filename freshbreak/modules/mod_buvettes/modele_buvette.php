@@ -31,15 +31,26 @@ class ModeleBuvette extends connexion
         return $stmt->fetchAll();
     }
 
-    public function getRole($login_utilisateur){
+    public function getRoleParBar($login_utilisateur, $barId){
         $sql = 'SELECT role_bar 
         FROM role 
-        WHERE login_utilisateur = :login_utilisateur';
+        WHERE login_utilisateur = :login_utilisateur
+        AND bar_associe = :bar';
 
         $stmt = self::$bdd->prepare($sql);
-        $stmt->bindValue(':login_utilisateur', $login_utilisateur);
-        $stmt->execute();
+        $stmt->execute([
+            ':login_utilisateur' => $login_utilisateur,
+            ':bar' => $barId
+        ]);
 
+
+        return $stmt->fetchColumn();
+    }
+
+    public function getNomBarById(int $barId) {
+        $sql = 'SELECT nom FROM bar WHERE id_bar = :id';
+        $stmt = self::$bdd->prepare($sql);
+        $stmt->execute([':id' => $barId]);
         return $stmt->fetchColumn();
     }
 

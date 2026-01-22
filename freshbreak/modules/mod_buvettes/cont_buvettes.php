@@ -11,10 +11,24 @@ class ContBuvettes {
         $this->modele = new ModeleBuvette();
     }
 
-    public function menu($login) {
-        $role =$this->modele->getRole($login);
+    public function menu($login, $barId) {
+        $role = $this->modele->getRoleParBar($login, $barId);
+        $nomBar = $this->modele->getNomBarById($barId);
+        $buvettes = $this->modele->getListe($login);
+
+        if (!$role) {
+            $this->vue->message("Aucun rôle associé à cette buvette.");
+            return;
+        }
+
         $method = 'menu_' . $role;
-        $this->vue->$method();
+
+        if (!method_exists($this->vue, $method)) {
+            $this->vue->message("Menu indisponible pour ce rôle.");
+            return;
+        }
+
+        $this->vue->$method($nomBar,$buvettes);
     }
 
     public function liste($login){

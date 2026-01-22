@@ -49,8 +49,8 @@ class ModBuvettes {
 
             case 'changer':
                 unset($_SESSION['bar_id']);
-                $this->controleur->liste($_SESSION['login']);
-                return;
+                header('Location: index.php?module=buvettes&action=liste');
+                exit;
 
             default:
                 echo '<p>Action inconnue</p>';
@@ -58,8 +58,9 @@ class ModBuvettes {
                 break;
         }
 
+        // menu affiché uniquement si un bar est sélectionné
         if (isset($_SESSION['bar_id'])) {
-            $this->controleur->menu($_SESSION['login']);
+            $this->controleur->menu($_SESSION['login'], $_SESSION['bar_id']);
         }
     }
 
