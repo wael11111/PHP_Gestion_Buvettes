@@ -8,9 +8,7 @@ class VueAdhesion extends Vue_generique {
     }
 
     public function confirmation($bar_id) {
-
         echo '<h2>Rejoindre une buvette</h2>';
-
         echo '<p>Souhaitez-vous envoyer une demande pour rejoindre cette buvette ?</p>';
 
         echo '
@@ -28,17 +26,18 @@ class VueAdhesion extends Vue_generique {
         </form>';
     }
 
-    public function display_request($request_user,$bar_name,$request_id) {
-        echo '<h2>Requête d adhesion au  bar</h2>
-                  <p>'.$request_user.' souhaite rejoindre le bar '.$bar_name.'.</p>
-                  <a href="index.php?module=rejoindreBuvette&action=accept_bar_creation&request_id='.$request_id.'">Accepter</a> 
-                  <a href="index.php?module=rejoindreBuvette&action=decline_bar_creation&request_id='.$request_id.'">Refuser</a>';
+    public function display_request($request_user, $bar_name, $request_id) {
+        echo '<h2>Requête d adhesion au bar</h2>
+                  <p>' . htmlspecialchars($request_user) . ' souhaite rejoindre le bar ' . htmlspecialchars($bar_name) . '.</p>
+                  <a href="index.php?module=rejoindreBuvette&action=accept_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Accepter</a> 
+                  <a href="index.php?module=rejoindreBuvette&action=decline_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Refuser</a>';
     }
 
     public function send_notice() {
         echo '<p>Votre demande a bien été envoyé.</p>
                 <a href="index.php?module=buvettes">Retour</a>';
     }
+
     public function message($texte) {
         echo '<p>' . htmlspecialchars($texte) . '</p>';
     }
@@ -48,3 +47,4 @@ class VueAdhesion extends Vue_generique {
               <a href="index.php?module=creationBuvettes&action=show_form">Retour</a>';
     }
 }
+?>

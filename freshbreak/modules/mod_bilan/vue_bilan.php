@@ -1,6 +1,7 @@
 <?php
 if (!defined('APP_SECURE')) die('Accès interdit.');
 require_once('./vue_generique.php');
+
 class Vue_bilan extends Vue_Generique {
     public function __construct() {
         parent::__construct();
@@ -19,9 +20,9 @@ class Vue_bilan extends Vue_Generique {
         <form action="index.php?module=bilan&action=summary_calculation" method="post">
                 <input type="hidden" name="csrf_token" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
                 <label>Date début</label>
-                <input type="date" min="'.$date_min.'" max="'.$date_max.'" name="date_debut">
+                <input type="date" min="' . htmlspecialchars($date_min) . '" max="' . htmlspecialchars($date_max) . '" name="date_debut">
                 <label>Date fin</label>
-                <input type="date" min="'.$date_min.'" max="'.$date_max.'" name="date_fin">
+                <input type="date" min="' . htmlspecialchars($date_min) . '" max="' . htmlspecialchars($date_max) . '" name="date_fin">
                 <button type="submit">Valider</button>
         </form>';
     }
@@ -35,10 +36,10 @@ class Vue_bilan extends Vue_Generique {
     public function display_summary($summary,$date_debut,$date_fin) {
         echo '
         <h3>Bilan statistique du bar</h3>
-            <p>Voici le bilan de la période démarrant du ' . $this->format_date($date_debut) . ' au ' . $this->format_date($date_fin) . ' :</p>
-            <p>Chiffre d\'affaire : ' . $summary['chiffre_affaire'] . '€</p>
-            <p>Dépenses : ' . $summary['depense'] . ('€</p>
-            <p>Bénéfices : ' . strval($summary['chiffre_affaire'] - $summary['depense'])) .'€</p>
+            <p>Voici le bilan de la période démarrant du ' . htmlspecialchars($this->format_date($date_debut)) . ' au ' . htmlspecialchars($this->format_date($date_fin)) . ' :</p>
+            <p>Chiffre d\'affaire : ' . htmlspecialchars($summary['chiffre_affaire']) . '€</p>
+            <p>Dépenses : ' . htmlspecialchars($summary['depense']) . '€</p>
+            <p>Bénéfices : ' . htmlspecialchars($summary['chiffre_affaire'] - $summary['depense']) . '€</p>
         <div>';
         $this->afficher_stock($summary['consommation']);
         echo '
@@ -46,18 +47,16 @@ class Vue_bilan extends Vue_Generique {
         <div>
             <h4>Quantité de produits réapprovisionnés</h4>';
         foreach ($summary['reapprovisionnement'] as $produit) {
-            echo '<p>'.$produit['nom'].' : '.$produit['quantite'].'</p>';
+            echo '<p>' . htmlspecialchars($produit['nom']) . ' : ' . (int)$produit['quantite'] . '</p>';
         }
         echo '
         </div>';
-
     }
 
     public function format_date($date) {
         $decomposed_date = explode("-",$date);
         return $decomposed_date[2]."/".$decomposed_date[1]."/".$decomposed_date[0];
     }
-
 
     public function afficher_stock(array $stock)
     {
@@ -76,8 +75,5 @@ class Vue_bilan extends Vue_Generique {
                 . " consommé</p>";
         }
     }
-
-
-
 }
 ?>
