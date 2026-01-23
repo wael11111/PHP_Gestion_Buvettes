@@ -301,6 +301,7 @@ footer {
     color: #888;
     font-size: 14px;
 }
+
 main h3, main h4 {
     color: #555;
     margin: 15px 0 10px 0;
@@ -308,6 +309,5 @@ main h3, main h4 {
 
 main h5 {
     color: #555;
-    margin: 15px 0 10px 0;
-    text-align: center;
+    margin-left: 50px;
 }
