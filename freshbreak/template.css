@@ -114,6 +114,11 @@ main h3, main h4 {
     margin: 15px 0 10px 0;
 }
 
+main h5 {
+    color: #555;
+    margin-left: 50px;
+}
+
 main p {
     margin-bottom: 10px;
     line-height: 1.8;
@@ -300,14 +305,4 @@ footer {
     text-align: center;
     color: #888;
     font-size: 14px;
-}
-
-main h3, main h4 {
-    color: #555;
-    margin: 15px 0 10px 0;
-}
-
-main h5 {
-    color: #555;
-    margin-left: 50px;
 }
