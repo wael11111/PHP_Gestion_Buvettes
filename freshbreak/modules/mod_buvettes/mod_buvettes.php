@@ -28,6 +28,10 @@ class ModBuvettes {
                 $this->controleur->choix();
                 break;
 
+            case 'rejoindre_buvette':
+                header("Location: index.php?module=rejoindreBuvette&action=show_form");
+                break;
+
             case 'liste':
                 $this->controleur->liste($_SESSION['login']);
                 break;
