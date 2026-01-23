@@ -20,10 +20,6 @@ class Mod_inbox {
             case 'delete_all_notif':
                 $this->controller->delete_all_notification();
                 break;
-
-            default:
-                echo "<p>Action inconnue.</p>";
-                break;
         }
     }
 

@@ -23,21 +23,17 @@ class ModCreationBuvettes {
                 else
                     echo "<h1>NUH HUH</h1>";
                 break;
-            case 'accept_bar_creation':
+            case 'accept_creation':
                 if ($_SESSION['admin'])
                     $this->controleur->accept_bar_creation();
                 else
                     echo "<h1>NUH HUH</h1>";
                 break;
-            case 'decline_bar_creation':
+            case 'decline_creation':
                 if ($_SESSION['admin'])
                     $this->controleur->decline_bar_creation();
                 else
                     echo "<h1>NUH HUH</h1>";
-                break;
-
-            default:
-                echo "<p>Action inconnue.</p>";
                 break;
         }
     }

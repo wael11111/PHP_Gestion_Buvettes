@@ -16,7 +16,7 @@ class ModBuvettes {
         // action unique
         $action = $_GET['action'] ?? 'choix';
 
-        // mémorisation du bar sélectionné
+        // mémorisation de la buvette sélectionné
         if (isset($_GET['bar_id'])) {
             $_SESSION['bar_id'] = intval($_GET['bar_id']);
 
@@ -55,19 +55,9 @@ class ModBuvettes {
             case 'changer':
                 unset($_SESSION['bar_id']);
                 header('Location: index.php?module=buvettes&action=liste');
-                exit;
-
-            default:
-                echo '<p>Action inconnue</p>';
-                $this->controleur->choix();
                 break;
         }
 
-        // menu affiché uniquement si un bar est sélectionné
-        //TODO: à débattre comme comportement
-        //TODO: revoir le comportement de changer de bar qui permet pas la demande de rejoindre
-        //TODO: le bandeau qui montre dans quel bar on est en haut à gauche
-        //TODO: notif à côté de l'inbox
         if (isset($_SESSION['bar_id'])) {
             $this->controleur->menu($_SESSION['login'], $_SESSION['bar_id']);
         }

@@ -39,9 +39,9 @@ class ContCreationBuvettes {
         $file_name3 = $this->generate_file_name($nom,'doc3');
 
 //        if (!$this->check_files()) {
-//    //        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_bar/' . $file_name1);
-//    //        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_bar/' . $file_name2);
-//    //        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_bar/' . $file_name3);
+//    //        move_uploaded_file($_FILES['doc1']['tmp_name'],'./dossiers_creation_buvette/' . $file_name1);
+//    //        move_uploaded_file($_FILES['doc2']['tmp_name'],'./dossiers_creation_buvette/' . $file_name2);
+//    //        move_uploaded_file($_FILES['doc3']['tmp_name'],'./dossiers_creation_buvette/' . $file_name3);
 //            $this->create_request_message_to_inbox($this->modele->new_request($_SESSION['login'], $nom));
 //            $this->vue->send_notice();
 //        }
@@ -124,9 +124,9 @@ class ContCreationBuvettes {
     public function finish_tasks($request_id,$request_user,$bar_name) {
         $this->modele->delete_request($request_id);
         $this->modele->delete_msg($request_id);
-//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc1.pdf');
-//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc2.pdf');
-//        unlink('./dossiers_creation_bar/'.$request_user.'_request_'.$bar_name.'_doc3.pdf');
+//        unlink('./dossiers_creation_buvette/'.$request_user.'_request_'.$bar_name.'_doc1.pdf');
+//        unlink('./dossiers_creation_buvette/'.$request_user.'_request_'.$bar_name.'_doc2.pdf');
+//        unlink('./dossiers_creation_buvette/'.$request_user.'_request_'.$bar_name.'_doc3.pdf');
         header('Location: index.php?module=inbox&action=show_inbox');
     }
 

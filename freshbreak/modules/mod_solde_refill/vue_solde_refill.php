@@ -13,7 +13,7 @@ class VueSoldeRefill extends Vue_generique {
         <form method="post" action="index.php?module=solde_refill&action=refill">
             <input type="hidden" name="csrf_token" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">
             <label>Solde actuel : </label>' . "$solde" . '€<br><label>Argent injecté : </label>
-            <input type="number" name="value" step="any" min="0.01"required><label>€</label><br>
+            <input type="number" name="value" step="any" min="0.01"required>€<br>
             <button type="submit">Recharger</button>
         </form>';
 

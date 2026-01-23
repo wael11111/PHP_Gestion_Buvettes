@@ -36,9 +36,6 @@ class ModAdhesion {
             case 'decline_bar_creation':
                     $this->controller->decline_adhesion();
                 break;
-          //  default:
-            //    echo "<p>Action inconnue.</p>";
-              //  break;
         }
     }
 

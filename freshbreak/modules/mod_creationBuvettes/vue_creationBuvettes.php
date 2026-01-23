@@ -35,11 +35,11 @@ class VueCreationBuvettes extends Vue_generique {
         echo '<h2>Requête de création de bar</h2>
                   <p>' . htmlspecialchars($request_user) . ' souhaite créer le bar ' . htmlspecialchars($bar_name) . '.</p>
                   <h3>Pièces justificatives :</h3>
-                      <a href="./dossiers_creation_bar/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc1.pdf">Document 1</a><br>
-                      <a href="./dossiers_creation_bar/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc2.pdf">Document 2</a><br>
-                      <a href="./dossiers_creation_bar/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc3.pdf">Document 3</a><br>
-                  <a href="index.php?module=creationBuvettes&action=accept_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Accepter</a> 
-                  <a href="index.php?module=creationBuvettes&action=decline_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Refuser</a>';
+                      <a href="./dossiers_creation_buvette/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc1.pdf">Document 1</a><br>
+                      <a href="./dossiers_creation_buvette/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc2.pdf">Document 2</a><br>
+                      <a href="./dossiers_creation_buvette/' . htmlspecialchars($request_user) . '_request_' . htmlspecialchars($bar_name) . '_doc3.pdf">Document 3</a><br>
+                  <a href="index.php?module=creationBuvettes&action=accept_creation&request_id=' . htmlspecialchars($request_id) . '"><button type="button">Accepter</button></a> 
+                  <a href="index.php?module=creationBuvettes&action=decline_creation&request_id=' . htmlspecialchars($request_id) . '"><button type="button">Refuser</button></a>';
 
         echo '<br><br><p><a href="index.php?module=inbox&action=show_inbox"><button type="button">Retour à la messagerie</button></a></p>';
     }

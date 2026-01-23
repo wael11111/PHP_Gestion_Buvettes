@@ -23,10 +23,6 @@ class Mod_inventaire_manuel {
             case 'save_tmp_inventory':
                 $this->controller->save_temp_inventory();
                 break;
-
-            default:
-                echo "<p>Action inconnue.</p>";
-                break;
         }
     }
 

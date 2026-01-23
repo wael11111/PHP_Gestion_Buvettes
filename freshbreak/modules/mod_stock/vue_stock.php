@@ -7,9 +7,9 @@ class VueStock extends Vue_generique {
     public function __construct() {
         parent::__construct();
     }
-    public function afficher($stocks, $nomBar) {
+    public function afficher($stocks, $nomBuvette) {
 
-        echo "<h2>Stock de la buvette " . htmlspecialchars($nomBar) . "</h2>";
+        echo "<h2>Stock de la buvette " . htmlspecialchars($nomBuvette) . "</h2>";
 
         if (empty($stocks)) {
             echo "<p>Aucun stock disponible.</p>";

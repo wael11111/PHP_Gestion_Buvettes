@@ -106,7 +106,8 @@ class VueBuvettes extends Vue_generique {
         echo '<a href="index.php?module=buvettes&action=voir_produits" class="menu-btn">Voir les produits</a>';
         echo '</div>';
 
-        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
+        if (count($buvettes_inscrit) > 0 && count($buvettes_non_inscrit) > 0)
+            $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
     public function menu_gérant($nomBar, $buvettes_inscrit, $buvettes_non_inscrit) {
@@ -120,7 +121,8 @@ class VueBuvettes extends Vue_generique {
             <a href="index.php?module=inventaire_manuel&action=display_all_products" class="menu-btn">Faire un inventaire manuel</a>
         </div>';
 
-        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
+        if (count($buvettes_inscrit) > 0 && count($buvettes_non_inscrit) > 0)
+            $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
     public function menu_barman($nomBar, $buvettes_inscrit, $buvettes_non_inscrit) {
@@ -131,7 +133,8 @@ class VueBuvettes extends Vue_generique {
         echo '<a href="index.php?module=stock&action=getStocks" class="menu-btn">Stock</a>';
         echo '</div>';
 
-        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
+        if (count($buvettes_inscrit) > 0 && count($buvettes_non_inscrit) > 0)
+            $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
     public function menu_admin(){

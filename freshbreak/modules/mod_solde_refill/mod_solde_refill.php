@@ -21,10 +21,6 @@ class ModSoldeRefill {
             case 'refill':
                 $this->controller->add_money_to_account();
                 break;
-
-            default:
-                echo "<p>Action inconnue.</p>";
-                break;
         }
     }
 

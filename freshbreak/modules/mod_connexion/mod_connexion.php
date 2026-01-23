@@ -10,9 +10,9 @@ class ModConnexion {
     }
 
     public function exec() {
-
-        $action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
-
+        $action = $_GET['action'] ?? 'connexion';
+        if (!isset($_SESSION['login']))
+            $action = 'connexion';
         switch ($action) {
             case 'inscription':
                 $this->controleur->form_inscription();
@@ -24,11 +24,6 @@ class ModConnexion {
 
             case 'deconnexion':
                 $this->controleur->deconnexion();
-                break;
-
-            default:
-                echo "<p>Action inconnue.</p>";
-                $this->controleur->form_connexion();
                 break;
         }
     }

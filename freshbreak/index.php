@@ -14,11 +14,10 @@
 
     connexion::initConnexion();
 
-
-    $module = isset($_GET['module']) ? $_GET['module'] : 'connexion';
-    if (!isset($_SESSION['login']))
+    $module = $_GET['module'] ?? 'connexion';
+    if (!isset($_SESSION['login'])) {
         $module = 'connexion';
-
+    }
     switch ($module) {
 
 
@@ -44,6 +43,7 @@
             break;
 
         case 'buvettes':
+            var_dump("maman");
             require_once('modules/mod_buvettes/mod_buvettes.php');
             $mod = new ModBuvettes();
             $mod->exec();
@@ -105,7 +105,6 @@
             $template_content = $mod->print_content();
             break;
     }
-
     $connexion_info = new Comp_connexion_info();
     $menu_nav = new Comp_menu_nav();
     require_once ("template.php");
