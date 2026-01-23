@@ -17,7 +17,7 @@ class VueSoldeRefill extends Vue_generique {
             <button type="submit">Recharger</button>
         </form>';
 
-        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">← Retour</button></a></p>';
+        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">Retour</button></a></p>';
     }
 
     public function error() {
