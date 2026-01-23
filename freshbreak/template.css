@@ -55,7 +55,7 @@ header h1 {
     color: white;
     text-decoration: none;
     padding: 8px 16px;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #76008e;
     transition: background-color 0.2s;
     font-size: 14px;
@@ -181,7 +181,7 @@ button {
     background-color: #76008e;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 15px;
     transition: background-color 0.2s;
