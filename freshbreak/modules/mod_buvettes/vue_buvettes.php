@@ -8,10 +8,12 @@ class VueBuvettes extends Vue_generique {
     }
 
     public function choice(){
-       echo '<a href="index.php?module=buvettes&action=liste">Choisir Bar</a>
-            |
-            <a href="index.php?module=creationBuvettes&action=show_form">Créer buvette</a>';
+        echo '<div class="action-buttons">';
+        echo '<a href="index.php?module=buvettes&action=liste" class="btn btn-primary">Choisir Bar</a>';
+        echo '<a href="index.php?module=creationBuvettes&action=show_form" class="btn btn-success">Créer buvette</a>';
+        echo '</div>';
     }
+
     public function afficher_buvette(array $tab) {
 
         if (empty($tab)) {
@@ -19,25 +21,18 @@ class VueBuvettes extends Vue_generique {
             return;
         }
 
+        echo '<div style="margin-bottom: 30px;">';
+        echo '<a href="index.php?module=creationBuvettes&action=show_form" class="btn btn-success">Créer une nouvelle buvette</a>';
+        echo '</div>';
 
-        echo '<h2> Bar rejoins </h2>';
-        echo '<div class="liste-buvettes">';
+        echo '<h2>Choisir une buvette</h2>';
 
+        echo '<div class="buvettes-grid">';
         foreach ($tab as $item) {
-
-            echo '<div class="buvette-card">';
-
+            echo '<a href="index.php?module=buvettes&action=liste&bar_id=' . htmlspecialchars($item['id_bar']) . '" class="buvette-card">';
             echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
-
-            echo '<a href="index.php?module=buvettes&bar_id='
-                . (int)$item['id_bar']
-                . '">
-                Accéder à la buvette
-              </a>';
-
-            echo '</div>';
+            echo '</a>';
         }
-
         echo '</div>';
     }
 
@@ -75,31 +70,23 @@ class VueBuvettes extends Vue_generique {
         echo '<hr>';
         echo '<h4>Changer de buvette</h4>';
 
-        echo '<form method="get" action="index.php">
-        <input type="hidden" name="module" value="buvettes">
-        <input type="hidden" name="action" value="liste">
-
-        <select name="bar_id" required>
-            <option value="">-- Sélectionner --</option>';
-
+        echo '<div class="buvettes-grid">';
         foreach ($buvettes as $b) {
-            echo '<option value="'.$b['id_bar'].'">'
-                . htmlspecialchars($b['nom']) .
-                '</option>';
+            echo '<a href="index.php?module=buvettes&action=liste&bar_id=' . htmlspecialchars($b['id_bar']) . '" class="buvette-card">';
+            echo '<h3>' . htmlspecialchars($b['nom']) . '</h3>';
+            echo '</a>';
         }
-
-        echo '</select>
-        <button type="submit">Valider</button>
-    </form>';
+        echo '</div>';
     }
 
     public function menu_client($nomBar, $buvettes) {
         echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
 
-        echo '<ul>
-            <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
-        </ul>';
+        echo '<div class="menu-actions">';
+        echo '<a href="index.php?module=buvettes&action=voir_produits" class="menu-btn">Voir les produits</a>';
+        echo '</div>';
     }
+
     public function menu_gérant($nomBar, $buvettes) {
         $this->headerBuvette($nomBar);
 
@@ -109,29 +96,33 @@ class VueBuvettes extends Vue_generique {
             <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">Ajouter un utilisateur</a></li>
             <li><a href="index.php?module=inventaire_manuel&action=display_all_products">Faire un inventaire manuel</a></li>
         </ul>';
+        echo '<div class="menu-actions">';
+        echo '<a href="index.php?module=stock" class="menu-btn">Gérer le stock</a>';
+        echo '<a href="index.php?module=bilan&action=display_form" class="menu-btn">Bilan</a>';
+        echo '<a href="index.php?module=gestion_profils&action=ajoututilisateur" class="menu-btn">Ajouter un utilisateur</a>';
+        echo '<a href="index.php?module=inventaire_manuel&action=display_all_products" class="menu-btn">Faire un inventaire manuel</a>';
+        echo '</div>';
 
         $this->changerBuvette($buvettes);
     }
+
     public function menu_barman($nomBar, $buvettes) {
         $this->headerBuvette($nomBar);
 
-        echo '<ul>
-            <li><a href="index.php?module=commande&action=client">Nouvelle commande</a></li>
-            <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
-            
-        </ul>';
+        echo '<div class="menu-actions">';
+        echo '<a href="index.php?module=commande&action=client" class="menu-btn">Nouvelle commande</a>';
+        echo '<a href="index.php?module=stock&action=getStocks" class="menu-btn">Stock</a>';
+        echo '</div>';
     }
 
     public function menu_admin(){
-        echo '<ul>
-            <li><a href="index.php?module=commande&action=client">Nouvelle commande</a></li>
-            <li><a href="index.php?module=stock&action=getStocks">stock</a></li>
-            <li><a href="index.php?module=buvettes&action=bilan">bilan</a></li>
-            <li><a href="index.php?module=buvettes&action=payer">payer</a></li>
-            <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">ajout utilisateur</a></li>
-        </ul>';
+        echo '<div class="menu-actions">';
+        echo '<a href="index.php?module=commande&action=client" class="menu-btn">Nouvelle commande</a>';
+        echo '<a href="index.php?module=stock&action=getStocks" class="menu-btn">Stock</a>';
+        echo '<a href="index.php?module=buvettes&action=bilan" class="menu-btn">Bilan</a>';
+        echo '<a href="index.php?module=gestion_profils&action=ajoututilisateur" class="menu-btn">Ajout utilisateur</a>';
+        echo '</div>';
     }
-
 
     public function afficher($buvettes) {
         echo "<h2>Liste des buvettes</h2>";
@@ -146,6 +137,26 @@ class VueBuvettes extends Vue_generique {
             echo "<li>" . htmlspecialchars($b['nom']) . "</li>";
         }
         echo "</ul>";
+    }
+
+    public function afficher_produits_disponibles($produits) {
+        echo '<h2>Produits disponibles</h2>';
+
+        if (empty($produits)) {
+            echo '<p>Aucun produit disponible actuellement.</p>';
+            return;
+        }
+
+
+        echo '<ul>';
+        foreach ($produits as $p) {
+            echo '<li>'
+                . htmlspecialchars($p['nom_produit'])
+                . ' - '
+                . htmlspecialchars($p['prix_vente'])
+                . ' €</li>';
+        }
+        echo '</ul>';
     }
 
     public function message($texte) {

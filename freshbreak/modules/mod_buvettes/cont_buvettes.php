@@ -32,8 +32,10 @@ class ContBuvettes {
     }
 
     public function liste($login){
-        if (isset($_SESSION['bar_id'])) {
-            return;
+        if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+            $buvettes = $this->modele->getAllBars();
+        } else {
+            $buvettes = $this->modele->getListe($login);
         }
 
         $this-> vue -> afficher_buvette($this->modele-> getJoinedListe($login));
@@ -53,7 +55,16 @@ class ContBuvettes {
 
     public function rejoins($login,$bar){
         return $this->modele->barRejoins($login,$bar);
+    }
 
+    public function voir_produits() {
+        if (!isset($_SESSION['bar_id'])) {
+            echo '<p>Veuillez d\'abord sélectionner une buvette.</p>';
+            return;
+        }
+
+        $produits = $this->modele->getProduitsDisponibles($_SESSION['bar_id']);
+        $this->vue->afficher_produits_disponibles($produits);
     }
 
     public function print_content() {

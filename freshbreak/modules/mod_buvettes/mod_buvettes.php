@@ -44,6 +44,10 @@ class ModBuvettes {
                 $this->controleur->payer($_SESSION['bar_id'] ?? null);
                 break;
 
+            case 'voir_produits':
+                $this->controleur->voir_produits();
+                break;
+
             case 'changer':
                 unset($_SESSION['bar_id']);
                 header('Location: index.php?module=buvettes&action=liste');
