@@ -16,14 +16,14 @@ class VueBuvettes extends Vue_generique {
 
     public function afficher_buvette(array $tab) {
 
-        if (empty($tab)) {
-            echo '<p>Aucune buvette disponible.</p>';
-            return;
-        }
-
         echo '<div style="margin-bottom: 30px;">';
         echo '<a href="index.php?module=creationBuvettes&action=show_form" class="btn btn-success">Créer une nouvelle buvette</a>';
         echo '</div>';
+
+        if (empty($tab)) {
+            return;
+        }
+
 
         echo '<h2>Choisir une buvette</h2>';
 
@@ -90,18 +90,13 @@ class VueBuvettes extends Vue_generique {
     public function menu_gérant($nomBar, $buvettes) {
         $this->headerBuvette($nomBar);
 
-        echo '<ul>
-            <li><a href="index.php?module=stock">Gérer le stock</a></li>
-            <li><a href="index.php?module=bilan&action=display_form">Bilan</a></li>
-            <li><a href="index.php?module=gestion_profils&action=ajoututilisateur">Ajouter un utilisateur</a></li>
-            <li><a href="index.php?module=inventaire_manuel&action=display_all_products">Faire un inventaire manuel</a></li>
-        </ul>';
-        echo '<div class="menu-actions">';
-        echo '<a href="index.php?module=stock" class="menu-btn">Gérer le stock</a>';
-        echo '<a href="index.php?module=bilan&action=display_form" class="menu-btn">Bilan</a>';
-        echo '<a href="index.php?module=gestion_profils&action=ajoututilisateur" class="menu-btn">Ajouter un utilisateur</a>';
-        echo '<a href="index.php?module=inventaire_manuel&action=display_all_products" class="menu-btn">Faire un inventaire manuel</a>';
-        echo '</div>';
+        echo '
+        <div class="menu-actions">
+            <a href="index.php?module=stock" class="menu-btn">Gérer le stock</a>
+            <a href="index.php?module=bilan&action=display_form" class="menu-btn">Bilan</a>
+            <a href="index.php?module=gestion_profils&action=ajoututilisateur" class="menu-btn">Ajouter un utilisateur</a>
+            <a href="index.php?module=inventaire_manuel&action=display_all_products" class="menu-btn">Faire un inventaire manuel</a>
+        </div>';
 
         $this->changerBuvette($buvettes);
     }

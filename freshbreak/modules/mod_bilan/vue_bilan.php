@@ -11,6 +11,7 @@ class Vue_bilan extends Vue_Generique {
         <h3>Bilan statistique du bar</h3>
             <p>Veuillez sélectionner une date de départ et de fin de l\'analyse statistique :</p>';
         $this->show_form($date_min,$date_max);
+        echo '<a href="index.php?module=buvettes&action=liste"><button type="button">← Retour au menu</button></a>';
     }
 
     public function show_form($date_min,$date_max) {

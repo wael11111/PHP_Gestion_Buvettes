@@ -14,7 +14,7 @@ class ContBuvettes {
     public function menu($login, $barId) {
         $role = $this->modele->getRoleParBar($login, $barId);
         $nomBar = $this->modele->getNomBarById($barId);
-        $buvettes = $this->modele->getListe($login);
+        $buvettes = $this->modele->getNonJoinedListe($login);
 
         if (!$role) {
             $this->vue->message("Aucun rôle associé à cette buvette.");
@@ -32,11 +32,11 @@ class ContBuvettes {
     }
 
     public function liste($login){
-        if (isset($_SESSION['admin']) && $_SESSION['admin']) {
-            $buvettes = $this->modele->getAllBars();
-        } else {
-            $buvettes = $this->modele->getListe($login);
-        }
+//        if (isset($_SESSION['admin']) && $_SESSION['admin']) {
+//            $buvettes = $this->modele->getAllBars();
+//        } else {
+//            $buvettes = $this->modele->getListe($login);
+//        }
 
         $this-> vue -> afficher_buvette($this->modele-> getJoinedListe($login));
         $this-> vue -> afficher_buvetteNon($this->modele-> getNonJoinedListe($login));
