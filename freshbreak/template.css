@@ -44,7 +44,7 @@ header h1 {
 }
 
 .user-solde {
-    background-color: rgba(255,255,255,0.25);
+    background-color: #76008e;
     padding: 6px 15px;
     border-radius: 20px;
     font-weight: 600;
@@ -56,7 +56,7 @@ header h1 {
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 5px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: #76008e;
     transition: background-color 0.2s;
     font-size: 14px;
     font-weight: 500;
@@ -182,7 +182,7 @@ input:focus, select:focus {
 
 button {
     padding: 10px 25px;
-    background-color: #ff6b9d;
+    background-color: #76008e;
     color: white;
     border: none;
     border-radius: 4px;
@@ -192,7 +192,7 @@ button {
 }
 
 button:hover {
-    background-color: #c94b7d;
+    background-color: #23003b;
 }
 
 a {
