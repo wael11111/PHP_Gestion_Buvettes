@@ -21,16 +21,16 @@ class VueAdhesion extends Vue_generique {
                    value="' . intval($bar_id) . '">
 
             <button type="submit">Accepter</button>
-            <button type="submit" formaction="index.php?module=rejoindreBuvette&action=menu">Annuler</button>
+            <button type="submit" formaction="index.php?module=buvettes&action=liste">Annuler</button>
  
         </form>';
     }
 
     public function display_request($request_user, $bar_name, $request_id) {
-        echo '<h2>Requête d adhesion au bar</h2>
+        echo '<h2>Requête d\'adhesion au bar</h2>
                   <p>' . htmlspecialchars($request_user) . ' souhaite rejoindre le bar ' . htmlspecialchars($bar_name) . '.</p>
-                  <a href="index.php?module=rejoindreBuvette&action=accept_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Accepter</a> 
-                  <a href="index.php?module=rejoindreBuvette&action=decline_bar_creation&request_id=' . htmlspecialchars($request_id) . '">Refuser</a>';
+                  <a href="index.php?module=rejoindreBuvette&action=accept_bar_creation&request_id=' . htmlspecialchars($request_id) . '"><button type="button">Accepter</button></a> 
+                  <a href="index.php?module=rejoindreBuvette&action=decline_bar_creation&request_id=' . htmlspecialchars($request_id) . '"><button type="button">Refuser</button></a>';
     }
 
     public function send_notice() {

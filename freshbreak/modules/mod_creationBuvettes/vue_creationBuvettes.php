@@ -28,7 +28,7 @@ class VueCreationBuvettes extends Vue_generique {
     public function message($message) {
         echo "<p>" . htmlspecialchars($message) . "</p>";
 
-        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">← Retour</button></a></p>';
+        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button"<Retour</button></a></p>';
     }
 
     public function display_request($request_user, $bar_name, $request_id) {

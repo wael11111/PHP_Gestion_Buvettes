@@ -52,7 +52,9 @@ class ContAdhesion {
 
 
     public function display_form() {
-        $this->vue->confirmation($_SESSION['bar_id'] ?? null);
+        $id_bar = $_SESSION['bar_id'] ?? null;
+        unset($_SESSION['bar_id']);
+        $this->vue->confirmation($id_bar);
     }
 
 
@@ -61,8 +63,6 @@ class ContAdhesion {
         if (isset($_GET['request_id'])) {
             $request_id = $_GET['request_id'];
             $request = $this->modele->get_request($request_id);
-            var_dump($request_id);
-            var_dump($request);
             $this->vue->display_request($request['login_request_user'],$this->modele->get_bar_name($request['request_content']),$request_id);
         }
     }

@@ -28,16 +28,12 @@ class VueStock extends Vue_generique {
         }
         echo "</ul>";
 
-        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">← Retour au menu</button></a></p>';
+        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">Retour au menu</button></a></p>';
     }
 
     public function formReapprovisionnement(array $produits, $message, $prixTotal) {
 
         echo "<h2>Réapprovisionnement</h2>";
-
-//        echo '<p style="font-size:0.9em">';
-        echo '<a href="index.php?module=produit&action=form_produit">';
-        echo 'Ajouter un produit</a></p>';
 
         echo '<form method="post">';
         echo '<label>Produit</label><br>';
@@ -64,10 +60,10 @@ class VueStock extends Vue_generique {
             echo '</p>';
         }
 
-        echo '<p style="font-size:0.9em">Produit introuvable ?
+        echo '<p>Produit introuvable ?
                 <a href="index.php?module=produit&action=form_produit">Ajouter un produit</a></p>';
 
-        echo '<p><a href="index.php?module=stock&action=getStocks"><button type="button">← Retour au stock</button></a></p>';
+        echo '<p><a href="index.php?module=stock&action=getStocks"><button type="button">Retour au stock</button></a></p>';
     }
 
     public function message($texte) {

@@ -12,7 +12,7 @@ class Vue_bilan extends Vue_Generique {
         <h3>Bilan statistique du bar</h3>
             <p>Veuillez sélectionner une date de départ et de fin de l\'analyse statistique :</p>';
         $this->show_form($date_min,$date_max);
-        echo '<a href="index.php?module=buvettes&action=liste"><button type="button">← Retour au menu</button></a>';
+        echo '<a href="index.php?module=buvettes&action=liste"><button type="button">Retour au menu</button></a>';
     }
 
     public function show_form($date_min,$date_max) {
@@ -47,10 +47,11 @@ class Vue_bilan extends Vue_Generique {
         <div>
             <h4>Quantité de produits réapprovisionnés</h4>';
         foreach ($summary['reapprovisionnement'] as $produit) {
-            echo '<p>' . htmlspecialchars($produit['nom']) . ' : ' . (int)$produit['quantite'] . '</p>';
+            echo '<p>' . htmlspecialchars($produit['nom_produit']) . ' : ' . (int)$produit['SUM(quantite)'] . '</p>';
         }
         echo '
         </div>';
+        echo '<p><a href="index.php?module=bilan&action=display_form"><button type="button">Retour</button></a></p>';
     }
 
     public function format_date($date) {

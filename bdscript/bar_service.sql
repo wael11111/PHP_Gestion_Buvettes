@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `achat_produit` (
+  `id_achat_produit` bigint UNSIGNED NOT NULL,
   `id_produit` bigint UNSIGNED NOT NULL,
   `bar_associe` bigint UNSIGNED NOT NULL,
   `quantite` int UNSIGNED NOT NULL,
@@ -197,7 +198,8 @@ CREATE TABLE `utilisateur` (
 -- Index pour la table `achat_produit`
 --
 ALTER TABLE `achat_produit`
-  ADD PRIMARY KEY (`id_produit`,`bar_associe`,`date_achat_produit`),
+  ADD PRIMARY KEY (`id_achat_produit`),
+  ADD UNIQUE KEY (`id_achat_produit`),
   ADD KEY `fk_achat_produit_bar` (`bar_associe`);
 
 --
@@ -294,6 +296,9 @@ ALTER TABLE `utilisateur`
 --
 -- AUTO_INCREMENT pour la table `bar`
 --
+ALTER TABLE `achat_produit`
+    MODIFY `id_achat_produit` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `bar`
   MODIFY `id_bar` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 

@@ -19,10 +19,6 @@ class Mod_bilan {
             case 'summary_calculation':
                 $this->controller->calculate_summary();
                 break;
-
-            default:
-                $this->controller->show_date_selection();
-                break;
         }
     }
 

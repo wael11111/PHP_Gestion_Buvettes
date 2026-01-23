@@ -24,7 +24,7 @@ class Vue_inventaire_manuel extends Vue_Generique {
                   <p>Il manque un produit ? <br><button type="submit" formaction="index.php?module=inventaire_manuel&action=save_tmp_inventory">Ajoutez-le</button></p>
               </form>';
 
-        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">← Retour au menu</button></a></p>';
+        echo '<p><a href="index.php?module=buvettes&action=liste"><button type="button">Retour au menu</button></a></p>';
     }
 
     public function title_stock_analyse() {
