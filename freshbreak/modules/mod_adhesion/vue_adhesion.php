@@ -21,7 +21,7 @@ class VueAdhesion extends Vue_generique {
                    value="' . intval($bar_id) . '">
 
             <button type="submit">Accepter</button>
-            <a href="index.php?module=buvettes&action=liste">Annuler</a>
+            <button type="submit" formaction="index.php?module=rejoindreBuvette&action=menu">Annuler</button>
  
         </form>';
     }

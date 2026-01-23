@@ -40,9 +40,7 @@ class ContAdhesion {
 
         $this->modele->new_message($gestionnaire, 3, $request_id);
         $this->vue->send_notice();
-
-
-
+        unset($_SESSION['bar_id']);
     }
     public function getGestionnaire($bar_id)
     {

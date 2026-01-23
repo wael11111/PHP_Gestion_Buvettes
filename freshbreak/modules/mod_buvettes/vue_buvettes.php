@@ -42,23 +42,30 @@ class VueBuvettes extends Vue_generique {
             return;
         }
         echo '<h2> Autre Bar </h2>';
-        echo '<div class="liste-buvettes">';
-
+//        echo '<div class="liste-buvettes">';
+//
+//        foreach ($tab as $item) {
+//
+//            echo '<div class="buvette-card">';
+//
+//            echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
+//
+//            echo '<a href="index.php?module=rejoindreBuvette&action=show_form&bar_id='
+//                . (int)$item['id_bar']
+//                . '">
+//                Rejoindre la buvette
+//              </a>';
+//
+//            echo '</div>';
+//        }
+//
+//        echo '</div>';
+        echo '<div class="buvettes-grid">';
         foreach ($tab as $item) {
-
-            echo '<div class="buvette-card">';
-
+            echo '<a href="index.php?module=buvettes&action=rejoindre_buvette&bar_id=' . htmlspecialchars($item['id_bar']) . '" class="buvette-card">';
             echo '<h3>' . htmlspecialchars($item['nom']) . '</h3>';
-
-            echo '<a href="index.php?module=rejoindreBuvette&action=show_form&bar_id='
-                . (int)$item['id_bar']
-                . '">
-                Rejoindre la buvette
-              </a>';
-
-            echo '</div>';
+            echo '</a>';
         }
-
         echo '</div>';
     }
 
@@ -66,28 +73,43 @@ class VueBuvettes extends Vue_generique {
         echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
     }
 
-    private function changerBuvette(array $buvettes) {
+    private function changerBuvette(array $buvettes_inscrit, $buvettes_non_inscrit) {
         echo '<hr>';
         echo '<h4>Changer de buvette</h4>';
 
-        echo '<div class="buvettes-grid">';
-        foreach ($buvettes as $b) {
-            echo '<a href="index.php?module=buvettes&action=liste&bar_id=' . htmlspecialchars($b['id_bar']) . '" class="buvette-card">';
-            echo '<h3>' . htmlspecialchars($b['nom']) . '</h3>';
-            echo '</a>';
+        if (count($buvettes_inscrit) > 0) {
+            echo '<h5>Buvettes où vous êtes inscrit</h5>';
+            echo '<div class="buvettes-grid">';
+            foreach ($buvettes_inscrit as $b) {
+                echo '<a href="index.php?module=buvettes&action=liste&bar_id=' . htmlspecialchars($b['id_bar']) . '" class="buvette-card">';
+                echo '<h3>' . htmlspecialchars($b['nom']) . '</h3>';
+                echo '</a>';
+            }
+            echo '</div>';
         }
-        echo '</div>';
+        if (count($buvettes_non_inscrit) > 0) {
+            echo '<h5>Autre buvettes</h5>';
+            echo '<div class="buvettes-grid">';
+            foreach ($buvettes_non_inscrit as $b) {
+                echo '<a href="index.php?module=buvettes&action=rejoindre_buvette&bar_id=' . htmlspecialchars($b['id_bar']) . '" class="buvette-card">';
+                echo '<h3>' . htmlspecialchars($b['nom']) . '</h3>';
+                echo '</a>';
+            }
+            echo '</div>';
+        }
     }
 
-    public function menu_client($nomBar, $buvettes) {
-        echo '<h3>Buvette : ' . htmlspecialchars($nomBar) . '</h3>';
+    public function menu_client($nomBar, $buvettes_inscrit, $buvettes_non_inscrit) {
+        $this->headerBuvette($nomBar);
 
         echo '<div class="menu-actions">';
         echo '<a href="index.php?module=buvettes&action=voir_produits" class="menu-btn">Voir les produits</a>';
         echo '</div>';
+
+        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
-    public function menu_gérant($nomBar, $buvettes) {
+    public function menu_gérant($nomBar, $buvettes_inscrit, $buvettes_non_inscrit) {
         $this->headerBuvette($nomBar);
 
         echo '
@@ -98,16 +120,18 @@ class VueBuvettes extends Vue_generique {
             <a href="index.php?module=inventaire_manuel&action=display_all_products" class="menu-btn">Faire un inventaire manuel</a>
         </div>';
 
-        $this->changerBuvette($buvettes);
+        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
-    public function menu_barman($nomBar, $buvettes) {
+    public function menu_barman($nomBar, $buvettes_inscrit, $buvettes_non_inscrit) {
         $this->headerBuvette($nomBar);
 
         echo '<div class="menu-actions">';
         echo '<a href="index.php?module=commande&action=client" class="menu-btn">Nouvelle commande</a>';
         echo '<a href="index.php?module=stock&action=getStocks" class="menu-btn">Stock</a>';
         echo '</div>';
+
+        $this->changerBuvette($buvettes_inscrit,$buvettes_non_inscrit);
     }
 
     public function menu_admin(){

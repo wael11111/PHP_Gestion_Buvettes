@@ -34,9 +34,11 @@ class ModAdhesion {
 
                 break;
             case 'decline_bar_creation':
-
                     $this->controller->decline_adhesion();
-
+                break;
+            case 'menu':
+                unset($_SESSION['bar_id']);
+                header("Location: index.php?module=buvettes&action=liste");
                 break;
           //  default:
             //    echo "<p>Action inconnue.</p>";
